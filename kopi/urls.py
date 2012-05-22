@@ -10,3 +10,6 @@ urlpatterns = patterns('',
     				   url(r'^static/(.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
 )
 
+urlpatterns += patterns('',
+                        url(r'^', include('blog.urls')),
+                        )
