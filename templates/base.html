@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr-be">
+  <head>
+    <meta charset="UTF-8" />
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="author" content="{% block author %}{% endblock %}">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/jquery-1.7.1.min.js"></script>
+  </head>
+  <body>
+      <header>
+        <div id="banner">{% block banner %}{% endblock %}</div>
+        
+        <nav>{% block nav %}{% endblock %}</nav>
+      </header>
+      
+      <section class="{% block body_class %}{% endblock %}">
+        <div id="body">
+        {% block body %}
+          <div class="content_title">
+            {% block content_title %}{% endblock %}
+          </div>
+          <div class="content">
+            {% block content %}{% endblock %}
+          </div>
+        {% endblock %}
+        </div>
+      </section>
+      
+      <footer>{% block footer %}{% endblock %}</footer>
+  </body>
+</html>
