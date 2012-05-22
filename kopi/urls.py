@@ -5,11 +5,14 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+from kopi.views import AboutView
+
 urlpatterns = patterns('',
-                       url(r'^kopi/', include(admin.site.urls)),
-    				   url(r'^static/(.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
+                       url(r'^kopi/', view=AboutView.as_view(), name='about_kopi'),
 )
 
 urlpatterns += patterns('',
+                        url(r'^admin/', include(admin.site.urls)),
+                        url(r'^static/(.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
                         url(r'^', include('blog.urls')),
                         )
