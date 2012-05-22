@@ -5,10 +5,11 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-from kopi.views import AboutView
+# from kopi.views import AboutView
+from django.views.generic import TemplateView
 
 urlpatterns = patterns('',
-                       url(r'^kopi/', view=AboutView.as_view(), name='about_kopi'),
+                       url(r'^kopi/', view=TemplateView.as_view(template_name="about.html"), name='about_kopi'),
 )
 
 urlpatterns += patterns('',
