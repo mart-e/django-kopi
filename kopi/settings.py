@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.comments',
 
     # 'grappelli',
 
@@ -130,6 +131,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'kopi',
     'blog',
+    'comments',
 
     'south',
 )

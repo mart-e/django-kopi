@@ -11,7 +11,7 @@ class PostDetailView(dates.DateDetailView):
     model = Post
     month_format = '%m'
     date_field = 'publish'
-    context_object_name = 'current_post',
+    context_object_name = 'current_post'
 
 
 class YearArchivePostView(dates.YearArchiveView):

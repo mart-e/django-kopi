@@ -20,18 +20,7 @@
         <nav>{% block nav %}{% endblock %}</nav>
       </header>
       
-      <section class="{% block body_class %}{% endblock %}">
-        <div id="body">
-        {% block body %}
-          <div class="content_title">
-            {% block content_title %}{% endblock %}
-          </div>
-          <div class="content">
-            {% block content %}{% endblock %}
-          </div>
-        {% endblock %}
-        </div>
-      </section>
+      {% block body %}{% endblock %}
       
       <footer>{% block footer %}{% endblock %}</footer>
   </body>

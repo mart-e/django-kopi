@@ -2,30 +2,66 @@
 
 {% load i18n %}
 
-{% block title %}{{ object.title }}{% endblock %}
-{% block body_class %}{{ object.super }} post_detail{% endblock %}
-{% block body_id %}post_{{ object.id }}{% endblock %}
+{% block title %}{{ current_post.title }}{% endblock %}
+{% block body_class %}{{ current_post.super }} post_detail{% endblock %}
+{% block body_id %}post_{{ current_post.id }}{% endblock %}
 
+{% load comments %}
+{% get_comment_count for current_post as comment_count %}
+{% get_comment_list for current_post as comment_list %}
 
-{% block content_title %}
-  <h2>{{ object.title }}</h2>
-  <p class="other_posts">
-    {% if object.get_previous_by_publish %}
-    <a class="previous" href="{{ object.get_previous_post.get_absolute_url }}" title="{% trans "View previous post" %}">&laquo; {{ object.get_previous_post }}</a>
-    {% endif %}
-    {% if object.get_next_by_publish %}
-    | <a class="next" href="{{ object.get_next_post.get_absolute_url }}" title="{% trans "View next post" %}">{{ object.get_next_post }} &raquo;</a>
-    {% endif %}
-  </p>
+{% block blog_post %}
+
+  <article class="blog_post">
+    <h1>{{ current_post.title }}</h1>
+    <p class="other_posts">
+      {% if current_post.get_previous_by_publish %}
+      <a class="previous" href="{{ current_post.get_previous_post.get_absolute_url }}" title="{% trans "View previous post" %}">&laquo; {{ current_post.get_previous_post }}</a>
+      {% endif %}
+      {% if current_post.get_next_by_publish %}
+      | <a class="next" href="{{ current_post.get_next_post.get_absolute_url }}" title="{% trans "View next post" %}">{{ current_post.get_next_post }} &raquo;</a>
+      {% endif %}
+    </p>
+    <div class="post_body">
+      {{ current_post.body|safe }}
+    </div>
+  </article>
+  <aside>
+    <div class="author">
+      <strong>Auteur</strong>
+      {{ current_post.author }}
+    </div>
+    <div class="date">
+      <strong>Date</strong>
+      <time pubdate datetime="{{ current_post.publish|date:"j-m-Y H:i" }}">{{ current_post.publish|date:"j M Y H:i" }}</time>
+    </div>
+    <!--<div class="tags">
+      <strong>Tags</strong>
+      <ul>
+        <li><a href="#">Voyage</a></li>
+        <li><a href="#">Couchsurfing</a></li>
+        <li><a href="#">Culture</a></li>
+      </ul>
+    </div>-->
+    <div class="coms">
+      <strong>{% if comments_count > 1 %}{{ comments_count }} commentaires{% else %}0 commentaire{% endif   %}</strong>
+      <!--<ul>
+        <li><a href="#">11:34 machin</a></li>
+        <li><a href="#">10/02 truc</a></li>
+        <li><a href="#">09/02 bidule</a></li>
+      </ul>-->
+    </div>
+  </aside>
+  
 {% endblock %}
 
+{% block comments %}
 
-{% block content %} 
-  <p class="date">{{ object.publish|date:"j F Y" }}</p>
+{% for comm in comment_list %}
+  <article>
+    <a href="{{ comm.user_url }}">{{ comm.user_name }}</a> dit:<br/>
+    <p>{{ comm.comment }}</p>
+  </article>
+{% endfor %}
 
-  <div class="body">
-    {{ object.body|safe }}
-  </div>
-
-  
 {% endblock %}
