@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
@@ -34,15 +33,15 @@ class Post(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
         
-    @permalink
+    @models.permalink
     def get_absolute_url(self):
         from time import strftime
-        return ('blog_detail', (), {
-            'year': self.publish.year,
-            'month': self.publish.strftime('%b'),
-            'day': self.publish.day,
-            'slug': self.slug
-        })
+        return ('blog_post_detail', [
+            self.publish.year,
+            self.publish.strftime('%m'),
+            self.publish.day,
+            self.slug
+        ])
 
     def get_previous_post(self):
         return self.get_previous_by_publish(status__gte=2)
