@@ -12,19 +12,7 @@
         {% if field.errors %} class="error"{% endif %}
         {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
 
-        {% if user.is_authenticated %}
-          {% if field.name == "name" %}
-            {{ user.username }} <a href="">{% trans "Logout" %}</a>
-          {% else %}
-            {% if field.name == "email" or field.name == "url" %}
-              {# Ignore fields for logged in users #}
-            {% else %}
-              {{ field.label_tag }} {{ field }}
-            {% endif %}
-          {% endif %}
-        {% else %}
-          {{ field.label_tag }} {{ field }}
-        {% endif %}
+        {{ field.label_tag }} {{ field }}
         
       </p>
     {% endif %}
