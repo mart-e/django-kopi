@@ -82,7 +82,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'd^1(vj))rh829!icyinsgl@6u1jc-(tvjn_(rpdz)5q#&h*$ge^=qy&knwmeb4^2omq4tw8nr*^pg377fk2dmirgflwgtrk=21=k'
+SECRET_KEY = 'PLEASE_CHANGE_ME_NOW' # <- understand user ?
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'kopi',
     'blog',
     'comments',
+    'inlines',
     'tools',
 
     'south',
