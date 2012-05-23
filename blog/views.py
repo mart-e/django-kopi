@@ -1,4 +1,4 @@
-from django.views.generic import dates
+from django.views.generic import dates, list
 from django.views.generic import TemplateView
 
 from blog.models import *
@@ -8,10 +8,16 @@ class AboutView(TemplateView):
 
 
 class PostDetailView(dates.DateDetailView):
+    template_name = 'blog/post_detail.html'
     model = Post
     month_format = '%m'
     date_field = 'publish'
     context_object_name = 'current_post'
+
+class ListPostView(list.ListView):
+    model = Post
+    month_format = '%m'
+    date_field = 'publish'
 
 
 class YearArchivePostView(dates.YearArchiveView):

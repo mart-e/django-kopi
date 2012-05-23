@@ -1,12 +1,15 @@
 from django.conf.urls import patterns, include, url
 from django.conf.urls.defaults import *
 
-from blog.views import AboutView, PostDetailView, DayArchivePostView, MonthArchivePostView, YearArchivePostView
+from blog.views import AboutView, DayArchivePostView, ListPostView
+from blog.views import PostDetailView, MonthArchivePostView, YearArchivePostView
 
 urlpatterns = patterns('blog.views',
 
-    url(r'^$', view=AboutView.as_view(), name='about_home'),
-    url(r'^about/$',view=AboutView.as_view(), name='about_url'),
+    url(r'^$',
+        view=ListPostView.as_view(),
+        name='blog_index'
+    ),
 
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$',
         view=PostDetailView.as_view(),
@@ -24,4 +27,6 @@ urlpatterns = patterns('blog.views',
     url(r'^(?P<year>\d{4})/$',
         YearArchivePostView.as_view()
     ),
+
+    url(r'^about/$',view=AboutView.as_view(), name='about_url'),
 )
