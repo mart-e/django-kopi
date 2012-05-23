@@ -1,0 +1,40 @@
+{% extends "blog/base_blog.html" %}
+
+{% block title %}Archive des articles{% endblock %}
+{% block body_class %}{{ block.super }} post_list{% endblock %}
+
+
+{% block content_title %}
+  <h2>Archive des articles</h2>
+{% endblock %}
+
+
+{% block body %}
+  {% load comments %}
+  
+  <div class="list post_list">
+    {% for post in object_list %}
+    {% get_comment_count for post as comment_count %}
+    <div class="item">
+      <h3 class="title">{{ post.publish|date:"Y F d" }} <a href="{{ post.get_absolute_url }}" title="Lire cet article">{{ post.title }}</a> [{{ comment_count }}]</h3>
+      {% if forloop.first %}
+        <p class="blog_post">{{ post.body|safe }}</p>
+      {% else %}
+        <p class="tease">{{ post.tease|safe }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  
+  {% if is_paginated %}
+  <p class="pagination">
+    {% if has_next %}
+    <a class="older" href="?page={{ next }}" title="Articles plus anciens">Avant</a>
+    {% endif %}
+    {% if has_next and has_previous %} | {% endif %}
+    {% if has_previous %}
+    <a class="newer" href="?page={{ previous }}" title="Articles plus anciens">Après</a>
+    {% endif %}
+  </p>
+  {% endif %}
+{% endblock %}
