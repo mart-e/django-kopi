@@ -1,16 +1,14 @@
 {% extends "blog/base_blog.html" %}
 
-{% load i18n %}
+{% load comments markup i18n %}
 
 {% block title %}{{ current_post.title }}{% endblock %}
 {% block body_class %}{{ current_post.super }} post_detail{% endblock %}
 {% block body_id %}post_{{ current_post.id }}{% endblock %}
 
-{% load comments %}
-{% get_comment_count for current_post as comment_count %}
-{% get_comment_list for current_post as comment_list %}
-
 {% block blog_post %}
+
+  {% get_comment_count for current_post as comment_count %}
 
   <article class="blog_post">
     <h1>{{ current_post.title }}</h1>
@@ -23,7 +21,7 @@
       {% endif %}
     </p>
     <div class="post_body">
-      {{ current_post.body|safe }}
+      {{ current_post.body|markdown }}
     </div>
   </article>
   <aside>
@@ -44,7 +42,7 @@
       </ul>
     </div>-->
     <div class="coms">
-      <strong>{% if comments_count > 1 %}{{ comments_count }} commentaires{% else %}0 commentaire{% endif   %}</strong>
+      <strong>{{ comment_count }} commentaire{% if comment_count > 1 %}s{% endif %}</strong>
       <!--<ul>
         <li><a href="#">11:34 machin</a></li>
         <li><a href="#">10/02 truc</a></li>
@@ -56,12 +54,22 @@
 {% endblock %}
 
 {% block comments %}
+{% get_comment_list for current_post as comment_list %}
 
 {% for comm in comment_list %}
   <article>
     <a href="{{ comm.user_url }}">{{ comm.user_name }}</a> dit:<br/>
-    <p>{{ comm.comment }}</p>
+    <p>{{ comm.comment|markdown:"safe,wikilinks,codehilite" }}</p>
   </article>
 {% endfor %}
+
+{% if current_post.allow_comments %}
+    {% render_comment_form for current_post %}
+  {% else %}
+    <div id="comment_form">
+      <h3>{% trans "Comments are closed" %}.</h3>
+      <p>{% trans "Comments have been closed for this post" %}.</p>
+    </div>
+  {% endif %}
 
 {% endblock %}
