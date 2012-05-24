@@ -1,8 +1,11 @@
 {% load stringutils comments i18n %}
 
-
 <form action="{% comment_form_target %}" method="post">{% csrf_token %}
-  {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
+  <div>{% if next %}
+          <input type="hidden" name="next" value="{{ next }}" />
+       {% else %}
+          <input type="hidden" name="next" value="{{ form.target_object.get_absolute_url }}" />
+       {% endif %}</div>
   {% for field in form %}
     {% if field.is_hidden %}
       <div>{{ field }}</div>
@@ -11,9 +14,16 @@
       <p
         {% if field.errors %} class="error"{% endif %}
         {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-
+        {% ifequal field.name "comment" %}
+          <a onclick="$('#markdown_syntax').toggle()">Partial Markdown syntax supported</a>
+          <div id="markdown_syntax" style="display:none">
+            Some elements of the Markdown syntax are supported :<br/>
+            <strong>__bold__ **bold**</strong><br/>
+            <em>_italic_ *italic*</em><br/>
+            <a href="">(link)[http://url]</a>
+          </div>
+        {% endifequal %}
         {{ field.label_tag }} {{ field }}
-        
       </p>
     {% endif %}
   {% endfor %}
