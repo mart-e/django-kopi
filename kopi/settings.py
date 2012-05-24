@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # 'django.contrib.comments',
     'django.contrib.markup',
+    'django.contrib.humanize',
 
     # 'grappelli',
 
