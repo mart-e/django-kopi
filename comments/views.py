@@ -1,8 +1,10 @@
 import datetime
 
 from django.conf import settings
-from django.shortcuts import get_object_or_404
 from django.contrib.comments.models import Comment
+from django.contrib.comments.views import comments as contrib_comments
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 
 from comments.forms import CommentForm
 from tools.shortcuts import render, redirect
@@ -46,3 +48,16 @@ def comment_remove(request, object_id, template_name='comments/delete.html'):
 def comment_error(request, error_message='You can not change this comment.',
         template_name='comments/error.html'):
     return render(request, template_name, {'error_message': error_message})
+
+
+# owerwrite the post_comment form to redirect to NEXTURL#cID
+def custom_comment_post(request, next=None, using=None):
+    response = contrib_comments.post_comment(request, next, using)
+
+    if type(response) == HttpResponseRedirect:
+        redirect_path, comment_id  = response.get('Location').split( '?c=' )
+        comment = Comment.objects.get( id=comment_id )
+        if comment:
+            return HttpResponseRedirect( comment.get_absolute_url("#c%(id)s") )
+    
+    return response
