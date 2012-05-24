@@ -1,6 +1,6 @@
 {% extends "blog/base_blog.html" %}
 
-{% load comments markup i18n %}
+{% load comments markup humanize i18n %}
 
 {% block title %}{{ current_post.title }}{% endblock %}
 {% block body_class %}{{ current_post.super }} post_detail{% endblock %}
@@ -31,7 +31,7 @@
     </div>
     <div class="date">
       <strong>Date</strong>
-      <time pubdate datetime="{{ current_post.publish|date:"j-m-Y H:i" }}">{{ current_post.publish|date:"j M Y H:i" }}</time>
+      <time pubdate datetime="{{ current_post.publish|date:"j-m-Y H:i" }}">{{ current_post.publish|naturaltime }}</time>
     </div>
     <!--<div class="tags">
       <strong>Tags</strong>
@@ -57,13 +57,14 @@
 {% get_comment_list for current_post as comment_list %}
 
 {% for comm in comment_list %}
-  <article>
+  <article id="c{{comm.id}}">
     <a href="{{ comm.user_url }}">{{ comm.user_name }}</a> dit:<br/>
     <p>{{ comm.comment|markdown:"safe,wikilinks,codehilite" }}</p>
   </article>
 {% endfor %}
 
 {% if current_post.allow_comments %}
+    
     {% render_comment_form for current_post %}
   {% else %}
     <div id="comment_form">
