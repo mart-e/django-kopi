@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 
 from comments.forms import CommentForm
 from tools.shortcuts import render, redirect
+from httpbl.views import HttpBLMiddleware
 
 
 DELTA = datetime.datetime.now() - datetime.timedelta(
@@ -52,6 +53,11 @@ def comment_error(request, error_message='You can not change this comment.',
 
 # owerwrite the post_comment form to redirect to NEXTURL#cID
 def custom_comment_post(request, next=None, using=None):
+    httpbl = HttpBLMiddleware()
+    response = httpbl.process_request(request)
+    if response:
+        return response
+
     response = contrib_comments.post_comment(request, next, using)
 
     if type(response) == HttpResponseRedirect:
