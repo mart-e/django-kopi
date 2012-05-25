@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'blog',
     'comments',
     'tools',
+    'httpbl',
 
     'south',
 )
@@ -167,3 +168,10 @@ LOGGING = {
         },
     }
 }
+
+# HTTP:Bl black list the projecthoneypot.org
+HTTPBLAGE = 14
+HTTPBLTHREAT = 30
+HTTPBLCLASS = 7
+HTTPBLKEY = 'PLEASE_CHANGE_ME_NOW' # <- get your key at http://projecthoneypot.org/httpbl_configure.php
+HTTPBLREDIRECT = '/404/'
