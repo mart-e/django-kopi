@@ -21,17 +21,28 @@ class HttpBLMiddleware(object):
       else:
          self.classification = classification
 
-   def process_request(self, request):
+   def process_request(self, request, detail=False):
+      """Check if the visitor is blacklisted
 
+      request : a django request object
+      detail : if True, will return a dictonnary with the detail of the threat
+         if the visitor is blacklisted, None otherwise
+               if False, will return a HttpResponse if blacklisted, None otherwise"""
+      self.ip = request.META.get('REMOTE_ADDR')
+      self.detail = detail
+      return check_ip()
+
+
+   def check_ip(self):
       if settings.HTTPBLKEY:
-         self.ip = request.META.get('REMOTE_ADDR')
+         
          self.iplist = self.ip.split('.')
          self.iplist.reverse()
 
          self.domain = 'dnsbl.httpbl.org'
 
          self.query = settings.HTTPBLKEY + "." + ".".join(self.iplist) + "." + self.domain
-            
+
          try:
             self.result = socket.gethostbyname(self.query)
          except socket.gaierror:
@@ -48,9 +59,13 @@ class HttpBLMiddleware(object):
                                   httpbl = self.result)
             self.log.save()
 
-            if settings.HTTPBLREDIRECT:
-               return HttpResponsePermanentRedirect(settings.HTTPBLREDIRECT)
+            if not self.detail:
+               if settings.HTTPBLREDIRECT:
+                  return HttpResponsePermanentRedirect(settings.HTTPBLREDIRECT)
+               else:
+                  return HttpResponseNotFound('<h1>Not Found</h1>')
             else:
-               return HttpResponseNotFound('<h1>Not Found</h1>')
-
+               return {'age':self.resultlist[1], 'threat':self.resultlist[2], 'classification':self.resultlist[3]}
+      
       return None
+
