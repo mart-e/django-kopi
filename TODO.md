@@ -1,15 +1,21 @@
 # TODO
 
+* Blog
+	* Markdown -> ok
+	* Rediger -> ok
 * Commentaires
-	* Markdown
-	* Preview
+	* Redirection -> ok
+	* Markdown -> partiel
+	* Preview -> moche mais ok
 	* OpenID
-	* Spam
+	* Spam -> partiel
 	* Avatars
 	* Cookie
+	* Edit comment
 * Tags
-* Markdown
 * Design
+	* Theme
 * Admin
 	* Upload media
 	* Insertion media
+	* Editeur js pour markdown
