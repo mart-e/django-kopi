@@ -30,7 +30,7 @@ class HttpBLMiddleware(object):
                if False, will return a HttpResponse if blacklisted, None otherwise"""
       self.ip = request.META.get('REMOTE_ADDR')
       self.detail = detail
-      return check_ip()
+      return self.check_ip()
 
 
    def check_ip(self):
