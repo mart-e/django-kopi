@@ -18,7 +18,7 @@
     {% for post in object_list %}
       {% get_comment_count for post as comment_count %}
       <article class="blog_post">
-        <h1><a href="{{ post.get_absolute_url }}" title="Lire cet article">{{ post.title }}</a></h1>
+        <h1><a href="{{ post.get_absolute_url }}" title="{% trans "Read this article" %}">{{ post.title }}</a></h1>
         {% if forloop.first %}
           <div class="post_body">{{ post.body|markdown }}</div>
         {% else %}
@@ -36,7 +36,7 @@
             <time pubdate datetime="{{ post.publish|date:"j-m-Y H:i" }}">{{ post.publish|naturaltime }}</time>
           </div>
           <div class="coms">
-            <strong>{{ comment_count }} commentaire{% if comment_count > 1 %}s{% endif %}</strong>
+            <strong>{% blocktrans count cpt=comment_count %}{{ cpt }} comment{% plural %}{{ cpt }} comments{% endblocktrans %}</strong>
           </div>
         </aside>
       {% endif %}

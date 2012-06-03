@@ -26,11 +26,11 @@
   </article>
   <aside>
     <div class="author">
-      <strong>Auteur</strong>
+      <strong>{% trans "Author" %}</strong>
       {{ current_post.author }}
     </div>
     <div class="date">
-      <strong>Date</strong>
+      <strong>{% trans "Date" %}</strong>
       <time pubdate datetime="{{ current_post.publish|date:"j-m-Y H:i" }}">{{ current_post.publish|naturaltime }}</time>
     </div>
     <!--<div class="tags">
@@ -42,7 +42,7 @@
       </ul>
     </div>-->
     <div class="coms">
-      <strong>{{ comment_count }} commentaire{% if comment_count > 1 %}s{% endif %}</strong>
+      <strong>{% blocktrans count cpt=comment_count %}{{ cpt }} comment{% plural %}{{ cpt }} comments{% endblocktrans %}</strong>
       <!--<ul>
         <li><a href="#">11:34 machin</a></li>
         <li><a href="#">10/02 truc</a></li>

@@ -19,3 +19,6 @@
 	* Upload media
 	* Insertion media
 	* Editeur js pour markdown
+* Translation
+	* Full english
+	* Translation french

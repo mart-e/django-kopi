@@ -47,4 +47,5 @@ class Post(models.Model):
         return self.get_previous_by_publish(status__gte=2)
 
     def get_next_post(self):
+        #print(self.title, "next", self.get_next_by_publish(status__gte=2))
         return self.get_next_by_publish(status__gte=2)
