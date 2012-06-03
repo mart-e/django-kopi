@@ -59,7 +59,7 @@
 {% for comm in comment_list %}
   <article id="c{{comm.id}}">
     <a href="{{ comm.user_url }}">{{ comm.user_name }}</a> dit:<br/>
-    <p>{{ comm.comment|markdown:"safe,wikilinks,codehilite" }}</p>
+    <p>{{ comm.comment|markdown:"safe" }}</p>
   </article>
 {% endfor %}
 
