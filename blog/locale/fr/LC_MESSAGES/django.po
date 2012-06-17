@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-03 13:11+0200\n"
+"POT-Creation-Date: 2012-06-03 13:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,12 +99,12 @@ msgstr "Auteur"
 msgid "Date"
 msgstr "Date"
 
-#: templates/blog/post_detail.html:45 templates/blog/post_list.html:39
-#, python-format
-msgid "%(comment_count)s comment"
-msgid_plural "%(comment_count)s comments"
-msgstr[0] "%(comment_count)s commentaire"
-msgstr[1] "%(comment_count)s commentaires"
+#: templates/blog/post_detail.html:45
+#, fuzzy, python-format
+msgid "%(tot)s comment"
+msgid_plural "%(tot)s comments"
+msgstr[0] "commentaire"
+msgstr[1] "commentaires"
 
 #: templates/blog/post_detail.html:71
 msgid "Comments are closed"
@@ -117,6 +117,13 @@ msgstr "Les commentaires ont été fermés pour cet article"
 #: templates/blog/post_list.html:21
 msgid "Read this article"
 msgstr "Lire cet article"
+
+#: templates/blog/post_list.html:39
+#, fuzzy, python-format
+msgid "%(cpt)s comment"
+msgid_plural "%(cpt)s comments"
+msgstr[0] "commentaire"
+msgstr[1] "commentaires"
 
 #: templates/blog/post_list.html:50
 msgid "read previous article"
