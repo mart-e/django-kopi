@@ -1,0 +1,301 @@
+html {
+    font-size: 100%;
+}
+
+@font-face{
+    font-family:'Cantarell';
+    src:url('fonts/Cantarell-Regular-webfont.woff') format('woff'),
+        url('fonts/Cantarell-Regular-webfont.ttf') format('truetype'),
+        url('fonts/Cantarell-Regular-webfont.svg#CantarellRegular') format('svg')
+}
+@font-face{
+    font-family:'Cantarell';
+    src:url('fonts/Cantarell-Oblique-webfont.woff') format('woff'),
+        url('fonts/Cantarell-Oblique-webfont.ttf') format('truetype'),
+        url('fonts/Cantarell-Oblique-webfont.svg#CantarellOblique') format('svg');
+    font-style:italic;
+}
+@font-face{
+    font-family:'Cantarell';
+    src:url('fonts/Cantarell-Bold-webfont.woff') format('woff'),
+        url('fonts/Cantarell-Bold-webfont.ttf') format('truetype'),
+        url('fonts/Cantarell-Bold-webfont.svg#CantarellBold') format('svg');
+    font-weight:bold;
+}
+@font-face{
+    font-family:'Cantarell';
+    src:url('fonts/Cantarell-BoldOblique-webfont.woff') format('woff'),
+        url('fonts/Cantarell-BoldOblique-webfont.ttf') format('truetype'),
+        url('fonts/Cantarell-BoldOblique-webfont.svg#CantarellBoldOblique') format('svg');
+    font-weight:bold;
+    font-style:italic;
+}
+
+body {
+    overflow-y: scroll;
+    font-family: Cantarell , Verdana, "DejaVu Sans", "Bitstream Vera Sans", Geneva, sans-serif;
+    background-color: #F8F8F8;
+    color: #434242;
+    line-height: 1.231;
+    width: 900px;
+    margin: auto;
+}
+
+header #banner {
+    font-variant: small-caps;
+    padding: 10px;
+    color:#333333;
+    background-color: #B7B7B7;
+}
+
+#logo {
+    display: inline-block;
+    margin: 10px 0 -5px 20px;
+}
+
+header #banner h1 {
+    font-size: 1.5em;
+    margin:0px;
+}
+
+header nav {
+    display: inline-block;
+    color:#B7B7B7;
+    background-color: #434242;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    border-top: 5px solid #333333;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style-type: none;
+    display: inline-block;
+    margin:0px;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    padding: 0 10px;
+}
+
+header nav a {
+    color: #F8F8F8;
+    text-decoration:none;
+    padding:5px 15px;
+    display: inline-block;
+}
+
+/* survol d'un lien de navigation */
+header nav a:hover {
+    color: #F8F8F8; 
+    border-radius: 0 0 10px 10px;
+    background-color: #69983A;
+}
+
+
+/* article and aside, side by side */
+.blog_post, aside
+{
+    display: inline-block;
+    vertical-align: top;
+    text-align: justify;
+}
+
+/* some info related to the article */
+section aside {
+    position: relative;
+    width:18%;
+    font-size: 0.9em;
+    margin-top: 20px;
+    /* left border
+    border-left: 2px dotted #ccc;
+    margin-left: -10px;
+    padding-left: 10px;
+    */
+}
+
+aside div {
+    margin-bottom:1.5em;
+}
+
+aside strong {
+    display: block;
+    font-variant: small-caps;
+}
+
+aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside .tags ul li {
+    background: url("tag-icon.png") no-repeat scroll left center transparent;
+    margin-left:-19px;
+    padding-left:19px;
+}
+
+aside .coms ul li {
+    background: url("com-icon.png") no-repeat scroll left center transparent;
+    margin-left:-19px;
+    padding-left:19px;
+}
+
+aside a {
+    color: #69983A;
+    text-decoration: none;
+}
+aside a:hover {
+    text-decoration: underline;
+}
+
+
+section .blog_post {
+    font-size: 0.9em;
+    padding: 0 2%;
+    margin-right: 15px;
+    width: 75%
+}
+
+section .blog_post h1 {
+    font-size: 1.5em;
+    padding: 5px 0 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 2px dotted #ccc;
+}
+
+
+section .blog_post p {
+    margin:12px 0;
+}
+
+
+/* suround image with a border */
+figure img {
+    margin-left:auto;
+}
+
+figure {
+    border: 1px dotted #ccc;
+    border-radius: 5px;
+    width:306px;
+    background-color:rgba(220,220,220,0.8);
+    margin:auto;
+    padding-top: 3px;
+}
+
+figure figcaption {
+    margin: 5px 0;
+    text-align:center;
+}
+
+pre code {
+    display: block;
+    padding: 10px;
+    background-color:#2A2A2A;
+    color:#F8F8F8;
+}
+
+.center {
+    display: block;
+    margin:auto;
+}
+
+footer {
+    margin: 30px 0;
+    font-size:0.8em;
+    text-align: justify;
+}
+
+
+.comments h1 {
+    font-size: 1.2em;
+    padding: 10px 0 0px 10px;
+    margin-bottom: 5px;
+}
+
+/* block containing an individual comment */
+.comments article {
+    margin:20px 5px;
+    border-radius: 4px;
+    padding: 5px 2%;
+    font-size: 0.8em;
+    position: relative;
+    padding-left: 60px;
+}
+
+.comment-odd {
+    background-color: rgba(102,153,0,0.5);
+}
+
+.comment-even {
+    background-color: rgba(255,255,255,0.5);
+}
+
+.comments .commentnum {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.comments article .avatar {
+    float:none;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    display: inline;
+}
+
+.comments .commenttext {
+    text-align: justify;
+}
+
+.comments p {
+    margin:10px 0;
+}
+
+.comments form{
+    text-align:justify;
+	padding:0 20px;
+	width:70%;
+}
+
+.comments form p{
+	margin:0.25em 0;
+}
+.comments form p:last-child{ /* Sélecteur avancé pour sélectionner le dernier paragraphe du formulaire */
+	margin-bottom:0;
+}
+.comments label{
+	cursor:pointer;
+	display:block;
+	font-size:0.8em;
+	line-height:28px;
+	width:130px;
+	font-variant:small-caps;
+	margin-left:2px;
+}
+input[type=submit]{
+    border: none;
+    border-radius:3px;
+	margin-left:2px;
+	color: #F8F8F8;
+	background-color:#2A2A2A;
+	font-variant:small-caps;
+	font-size: 0.8em;
+	padding: 5px 15px;
+}
+
+a {
+    font-style: none;
+    color: #333333;
+}
+
+a:hover {
+    color: #69983A;
+}
+
+a img {
+    border: none;
+}

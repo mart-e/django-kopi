@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}My Kopi Blog{% endblock %}
+
+{% block description %}Description of the blog{% endblock %}
+
+{% block author %}myself{% endblock %}
+
+{% block banner %}
+    <h1>My Kopi Blog</h1>
+{% endblock %}
+
+{% block nav %}
+  <ul>
+    <li><a href="/">Blog</a></li>
+    <li><a href="#">Links</a></li>
+    <li><a href="/about">About</a></li>
+  </ul>
+{% endblock %}
+
+
+{% block footer %}
+  Unless explicit mention, the content of this blog is released under a <a rel="license" href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a> licence.<br/>
+  Powered by <a href="/kopi/">Kopi</a>.
+{% endblock %}
