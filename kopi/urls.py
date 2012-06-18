@@ -13,6 +13,8 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
+    					url(r'^grappelli/', include('grappelli.urls')),
+                        url(r'^grappelli/', include(admin.site.urls)),
                         url(r'^admin/', include(admin.site.urls)),
                         url(r'^static/(.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
                         url(r'^', include('blog.urls')),
