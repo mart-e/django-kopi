@@ -136,7 +136,8 @@ INSTALLED_APPS = (
     'comments',
     'tools',
     'httpbl',
-
+    
+    'tagging',
     'south',
 )
 
