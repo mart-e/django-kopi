@@ -12,7 +12,7 @@
 	* Avatars
 	* Cookie
 	* Edit comment
-* Tags
+* Tags -> ok
 * Design
 	* Theme
 * Admin
