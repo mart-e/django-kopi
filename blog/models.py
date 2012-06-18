@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+from tagging.fields import TagField
 
 import datetime
 
@@ -20,8 +21,8 @@ class Post(models.Model):
     publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
+    tags = TagField()
     # categories = models.ManyToManyField(Category, blank=True)
-    # tags = TagField()
 
     class Meta:
         verbose_name = _('post')
