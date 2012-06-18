@@ -54,14 +54,8 @@
 {% endblock %}
 
 {% block comments %}
-{% get_comment_list for current_post as comment_list %}
 
-{% for comm in comment_list %}
-  <article id="c{{comm.id}}">
-    <a href="{{ comm.user_url }}">{{ comm.user_name }}</a> dit:<br/>
-    <p>{{ comm.comment|markdown:"safe" }}</p>
-  </article>
-{% endfor %}
+{% render_comment_list for current_post %}
 
 {% if current_post.allow_comments %}
     
