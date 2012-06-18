@@ -8,6 +8,7 @@
       {% else %}
         <h4>{{ comment.name }} <small>{{ comment.submit_date|date }}</small></h4>
       {% endif %}
+      <img src="{{ comment.get_avatar_url }}" />
       {{ comment.comment|markdown }}
       <p class="byline">
         {% if comment.user == user %}

@@ -6,7 +6,7 @@ from django.contrib.comments.views import comments as contrib_comments
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
-from comments.forms import CommentForm
+from comments.forms import KopiCommentForm
 from tools.shortcuts import render, redirect
 from httpbl.views import HttpBLMiddleware
 
@@ -67,3 +67,4 @@ def custom_comment_post(request, next=None, using=None):
             return HttpResponseRedirect( comment.get_absolute_url("#c%(id)s") )
     
     return response
+
