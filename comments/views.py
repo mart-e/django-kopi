@@ -3,15 +3,22 @@ import datetime
 from django.conf import settings
 from django.contrib.comments.models import Comment
 from django.contrib.comments.views import comments as contrib_comments
+from django.contrib.comments.views.utils import next_redirect, confirmation_view
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.db import models
 from django.http import HttpResponseRedirect
+from django.template import RequestContext
 from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_POST
+from django.utils.timezone import utc
 
 from comments.forms import KopiCommentForm
 from tools.shortcuts import render, redirect
 from httpbl.views import HttpBLMiddleware
 
-
-DELTA = datetime.datetime.now() - datetime.timedelta(
+#DELTA = datetime.datetime.now() - datetime.timedelta(
+DELTA = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(
             minutes=getattr(settings, 'COMMENT_ALTERATION_TIME_LIMIT', 15))
 
 
