@@ -3,16 +3,19 @@
 * Blog
 	* Markdown -> ok
 	* Rediger -> ok
+	* RSS
 * Commentaires
 	* Redirection -> ok
 	* Markdown -> partiel
 	* Preview -> moche mais ok
+	* Choix nom/email/url
 	* OpenID
 	* Spam -> partiel
 	* Avatars
 	* Cookie
-	* Edit comment
+	* Edition
 * Tags -> ok
+* Recherche -> http://www.vlent.nl/weblog/2010/10/14/searching-django-site-part-1-what-and-why/
 * Design
 	* Theme
 * Admin
