@@ -31,15 +31,15 @@ class KopiCommentForm(CommentForm):
         name = self.cleaned_data.get('name') 
         email = self.cleaned_data.get('email')
         url = self.cleaned_data.get('url')
-        if not name and not email and not url:
-            self._errors
-            raise forms.ValidationError(_("Please fill at least of of the name, email or url fields"))
+        # if not name and not email and not url:
+        #     self._errors
+        #     raise forms.ValidationError(_("Please fill at least of of the name, email or url fields"))
         return self.cleaned_data
     
     def computeIdentifier(self, name=None, email=None, url=None):
         """From the identifier, compute the other fields"""
         if not name and not email and not url:
-            return None
+            return "Anonymous"
 
         if name:
             return name
