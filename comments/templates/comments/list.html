@@ -6,7 +6,7 @@
       {% if comment.user %}
         <h4><a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a> <small>{{ comment.submit_date|timesince }} ago</small></h4>
       {% else %}
-        <h4>{{ comment.name }} <small>{{ comment.submit_date|date }}</small></h4>
+          <h4>{% if comment.url %}<a href="{{ comment.url }}">{{ comment.identifier }}</a>{% else %}{{ comment.identifier }}{% endif %} <small>{{ comment.submit_date|date }}</small></h4>
       {% endif %}
       <img src="{{ comment.get_avatar_url }}" />
       {{ comment.comment|markdown }}

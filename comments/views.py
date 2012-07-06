@@ -58,7 +58,7 @@ def comment_error(request, error_message='You can not change this comment.',
     return render(request, template_name, {'error_message': error_message})
 
 
-# owerwrite the post_comment form to redirect to NEXTURL#cID
+# owerwrite the post_comment form to redirect to NEXTURL#cID and spam checking
 def custom_comment_post(request, next=None, using=None):
     httpbl = HttpBLMiddleware()
     response = httpbl.process_request(request)

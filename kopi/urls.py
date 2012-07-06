@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+from blog.views import ListPostView
 # from kopi.views import AboutView
 from django.views.generic import TemplateView
 
@@ -17,6 +18,7 @@ urlpatterns += patterns('',
                         # url(r'^grappelli/', include(admin.site.urls)),
                         url(r'^admin/', include(admin.site.urls)),
                         url(r'^static/(.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
-                        url(r'^', include('blog.urls')),
+                        url(r'^post/', include('blog.urls')),
                         url(r'^comments/', include('comments.urls')),
+                        url(r'^$',view=ListPostView.as_view())
                         )
