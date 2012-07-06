@@ -3,12 +3,12 @@
 * Blog
 	* Markdown -> ok
 	* Rediger -> ok
-	* RSS
+	* RSS -> ok
 * Commentaires
 	* Redirection -> ok
 	* Markdown -> partiel
 	* Preview -> moche mais ok
-	* Choix nom/email/url
+	* Choix nom/email/url -> ok
 	* OpenID
 	* Spam -> partiel
 	* Avatars
@@ -25,3 +25,4 @@
 * Translation
 	* Full english
 	* Translation french
+* Wordpress migration

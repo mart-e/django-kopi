@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from tagging.fields import TagField
 
+from markdown import markdown
+
 import datetime
 
 class Post(models.Model):
@@ -15,7 +17,9 @@ class Post(models.Model):
     slug = models.SlugField(_('slug'), unique_for_date='publish')
     author = models.ForeignKey(User, blank=True, null=True)
     body = models.TextField(_('body'), )
+    body_html = models.TextField(editable=False, blank=True)
     tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
+    tease_html = models.TextField(editable=False, blank=True)
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1)
     allow_comments = models.BooleanField(_('allow comments'), default=True)
     publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
@@ -50,3 +54,8 @@ class Post(models.Model):
     def get_next_post(self):
         #print(self.title, "next", self.get_next_by_publish(status__gte=2))
         return self.get_next_by_publish(status__gte=2)
+
+    def save(self, force_insert=False, force_update=False):
+        self.body_html = markdown(self.body)
+        self.tease_html = markdown(self.tease)
+        super(Post, self).save(force_insert, force_update)

@@ -2,3 +2,4 @@
 *.db
 *.mo
 secret.txt
+settings.py

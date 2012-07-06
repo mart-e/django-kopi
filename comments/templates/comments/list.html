@@ -9,7 +9,7 @@
           <h4>{% if comment.url %}<a href="{{ comment.url }}">{{ comment.identifier }}</a>{% else %}{{ comment.identifier }}{% endif %} <small>{{ comment.submit_date|date }}</small></h4>
       {% endif %}
       <img src="{{ comment.get_avatar_url }}" />
-      {{ comment.comment|markdown }}
+      {{ comment.comment_html|safe }}
       <p class="byline">
         {% if comment.user == user %}
           <a class="edit" href="{% url comments-edit comment.id %}">Edit</a>
