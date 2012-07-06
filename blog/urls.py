@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf.urls.defaults import *
 
+from blog.feed import LatestPostFeed
 from blog.views import AboutView, DayArchivePostView, ListPostView
 from blog.views import PostDetailView, MonthArchivePostView, YearArchivePostView
 
@@ -27,6 +28,7 @@ urlpatterns = patterns('blog.views',
     url(r'^(?P<year>\d{4})/$',
         YearArchivePostView.as_view()
     ),
+    (r'^feed/$', LatestPostFeed()),
 
     url(r'^about/$',view=AboutView.as_view(), name='about_url'),
 )
