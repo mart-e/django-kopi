@@ -13,6 +13,13 @@ urlpatterns = patterns('',
                        url(r'^kopi/', view=TemplateView.as_view(template_name="about.html"), name='about_kopi'),
 )
 
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^mymedia/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )
+
 urlpatterns += patterns('',
     					# url(r'^grappelli/', include('grappelli.urls')),
                         # url(r'^grappelli/', include(admin.site.urls)),
