@@ -1,6 +1,6 @@
 from django import template
-from inlines.parser import inlines
 from inlines.models import InlineType
+from inlines.parser import inlines
 import re
 
 register = template.Library()
