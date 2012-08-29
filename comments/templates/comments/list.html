@@ -8,7 +8,7 @@
       {% else %}
           <h4>{% if comment.url %}<a href="{{ comment.url }}">{{ comment.identifier }}</a>{% else %}{{ comment.identifier }}{% endif %} <small>{{ comment.submit_date|date }}</small></h4>
       {% endif %}
-      <img src="{{ comment.get_avatar_url }}" />
+      <img src="{{ comment.get_avatar_url }}" width="{{ comment.AVATAR_SIZE }}" height="{{ comment.AVATAR_SIZE }}" alt="Avatar of comment #{{ comment.id }}" />
       {{ comment.comment_html|safe }}
       <p class="byline">
         {% if comment.user == user %}
