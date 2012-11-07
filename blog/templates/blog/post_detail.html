@@ -1,6 +1,6 @@
 {% extends "blog/base_blog.html" %}
 
-{% load comments markup humanize i18n %}
+{% load comments markup humanize i18n inlines_tags %}
 
 {% block title %}{{ current_post.title }}{% endblock %}
 {% block body_class %}{{ current_post.super }} post_detail{% endblock %}
@@ -21,7 +21,7 @@
       {% endif %}
     </p>
     <div class="post_body">
-      {{ current_post.body_html|safe }}
+      {{ current_post.body_html|render_inlines|safe }}
     </div>
   </article>
   <aside>
