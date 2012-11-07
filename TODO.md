@@ -11,7 +11,7 @@
 	* Choix nom/email/url -> ok
 	* OpenID
 	* Spam -> partiel
-	* Avatars
+	* Avatars -> javatar,gravatar (devrait passer en js)
 	* Cookie
 	* Edition
 * Tags -> ok
