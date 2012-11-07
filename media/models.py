@@ -73,12 +73,12 @@ class PhotoSet(models.Model):
 class Photo(models.Model):
     """Photo model"""
     LICENSES = (
-        ('http://creativecommons.org/licenses/by/2.0/',         'CC Attribution'),
-        ('http://creativecommons.org/licenses/by-nd/2.0/',      'CC Attribution-NoDerivs'),
-        ('http://creativecommons.org/licenses/by-nc-nd/2.0/',   'CC Attribution-NonCommercial-NoDerivs'),
-        ('http://creativecommons.org/licenses/by-nc/2.0/',      'CC Attribution-NonCommercial'),
-        ('http://creativecommons.org/licenses/by-nc-sa/2.0/',   'CC Attribution-NonCommercial-ShareAlike'),
-        ('http://creativecommons.org/licenses/by-sa/2.0/',      'CC Attribution-ShareAlike'),
+        ('http://creativecommons.org/licenses/by/3.0/',         'CC Attribution'),
+        ('http://creativecommons.org/licenses/by-nd/3.0/',      'CC Attribution-NoDerivs'),
+        ('http://creativecommons.org/licenses/by-nc-nd/3.0/',   'CC Attribution-NonCommercial-NoDerivs'),
+        ('http://creativecommons.org/licenses/by-nc/3.0/',      'CC Attribution-NonCommercial'),
+        ('http://creativecommons.org/licenses/by-nc-sa/3.0/',   'CC Attribution-NonCommercial-ShareAlike'),
+        ('http://creativecommons.org/licenses/by-sa/3.0/',      'CC Attribution-ShareAlike'),
     )
     title = models.CharField(max_length=255)
     slug = models.SlugField()
