@@ -58,10 +58,9 @@
 {% render_comment_list for current_post %}
 
 {% if current_post.allow_comments %}
-    
     {% render_comment_form for current_post %}
   {% else %}
-    <div id="comment_form">
+    <div id="comment-form">
       <h3>{% trans "Comments are closed" %}.</h3>
       <p>{% trans "Comments have been closed for this post" %}.</p>
     </div>
