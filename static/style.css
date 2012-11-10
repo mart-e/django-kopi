@@ -41,6 +41,12 @@ body {
     margin: auto;
 }
 
+
+/*
+ * Header
+ */
+
+
 header #banner {
     font-variant: small-caps;
     padding: 10px;
@@ -93,6 +99,14 @@ header nav a:hover {
     border-radius: 0 0 10px 10px;
     background-color: #69983A;
 }
+
+
+
+
+
+/*
+ * Aside
+ */
 
 
 /* article and aside, side by side */
@@ -152,11 +166,16 @@ aside a:hover {
 }
 
 
+
+/*
+ * Blog post
+ */
+
 section .blog_post {
     font-size: 0.9em;
     padding: 0 2%;
     margin-right: 15px;
-    width: 75%
+    width: 75%;
 }
 
 section .blog_post h1 {
@@ -169,6 +188,35 @@ section .blog_post h1 {
 
 section .blog_post p {
     margin:12px 0;
+}
+
+
+/*
+ * Image & includes
+ */
+
+img {
+    max-width:100%;
+    height: auto;
+}
+
+.small_left, .small_center, .small_right {
+    width: 30%;
+}
+.small_left, .medium_left, .large_left {
+    float:left;
+}
+.small_center, .medium_center, .large_center {
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+.small_right, .medium_right, .large_right {
+    float: right;
+}
+
+.photo {
+
 }
 
 
