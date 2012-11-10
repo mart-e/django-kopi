@@ -27,5 +27,7 @@ urlpatterns += patterns('',
                         url(r'^static/(.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
                         url(r'^post/', include('blog.urls')),
                         url(r'^comments/', include('comments.urls')),
+                        url(r'^photo/', include('media.urls.photos')),
+                        url(r'^video/', include('media.urls.videos')),
                         url(r'^$',view=ListPostView.as_view())
                         )
