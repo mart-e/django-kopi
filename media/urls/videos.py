@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from kopi.media.models import *
+from media.models import *
 
 
 video_list = {
