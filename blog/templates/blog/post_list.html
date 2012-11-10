@@ -1,6 +1,6 @@
 {% extends "blog/base_blog.html" %}
 
-{% load markup humanize i18n %}
+{% load markup humanize i18n inlines_tags %}
 
 {% block title %}Archive des articles{% endblock %}
 {% block body_class %}{{ block.super }} post_list{% endblock %}
@@ -19,10 +19,10 @@
       {% get_comment_count for post as comment_count %}
       <article class="blog_post">
         <h1><a href="{{ post.get_absolute_url }}" title="{% trans "Read this article" %}">{{ post.title }}</a></h1>
-        {% if forloop.first %}
-          <div class="post_body">{{ post.body_html|safe }}</div>
+        {% if forloop.first or not post.tease %}
+          <div class="post_body">{{ post.body_html|render_inlines }}</div>
         {% else %}
-          <div class="post_body">{{ post.tease_html|safe }}</div>
+          <div class="post_body">{{ post.tease_html|render_inlines }}</div>
         {% endif %}
       </article>
       {% if forloop.first %}

@@ -26,7 +26,6 @@ class Post(models.Model):
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
     tags = TagField()
-    # categories = models.ManyToManyField(Category, blank=True)
 
     class Meta:
         verbose_name = _('post')
