@@ -3,3 +3,4 @@
 *.mo
 secret.txt
 settings.py
+uploads/
