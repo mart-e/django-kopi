@@ -19,10 +19,13 @@
         </a>
       <img src="{{ comment.get_avatar_url }}" width="{{ comment.AVATAR_SIZE }}" height="{{ comment.AVATAR_SIZE }}" alt="Avatar of comment #{{ comment.id }}" class="avatar" />
       {{ comment.comment_html|safe }}
+
       <p class="byline">
-        {% if comment.user == user %}
+        {% if comment.still_editable %}
+          {% if comment.session_id == request.session.session_key %}
           <a class="edit" href="{% url comments-edit comment.id %}">Edit</a>
           <a class="remove" href="{% url comments-remove comment.id %}">Remove</a>
+          {% endif %}
         {% endif %}
       </p>
     </article>

@@ -1,5 +1,9 @@
+import datetime
+
 from django.db import models
+from django.conf import settings
 from django.contrib.comments.models import Comment
+from django.utils.timezone import utc
 
 from markdown import markdown
 import hashlib
@@ -12,6 +16,7 @@ class KopiComment(Comment):
 
     identifier = models.CharField(max_length=50)
     comment_html = models.TextField(editable=False, blank=True)
+    session_id = models.TextField(editable=False, blank=True)
 
     def get_avatar_url(self):
         if self.user_url:
@@ -28,6 +33,12 @@ class KopiComment(Comment):
         #print("default {0}".format(DEFAULT_AVATAR_URL))
         return DEFAULT_AVATAR_URL
 
+
+    def still_editable(self):
+        """Check if a comment is not too old to be edited"""
+        max_date = self.submit_date + datetime.timedelta(minutes=getattr(settings, 'COMMENT_ALTERATION_TIME_LIMIT', 15))
+        return max_date > datetime.datetime.utcnow().replace(tzinfo=utc)
+            
 
     def save(self, force_insert=False, force_update=False):
         self.comment_html = markdown(self.comment, safe_mode=True)
