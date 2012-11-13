@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-03 13:43+0200\n"
+"POT-Creation-Date: 2012-11-13 10:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: models.py:10
+#: models.py:13
 msgid "Draft"
 msgstr "Brouillon"
 
-#: models.py:11
+#: models.py:14
 msgid "Public"
 msgstr "Publique"
 
-#: models.py:13
+#: models.py:16
 msgid "title"
 msgstr "titre"
 
-#: models.py:14
+#: models.py:17
 msgid "slug"
 msgstr ""
 
-#: models.py:16
+#: models.py:19
 msgid "body"
 msgstr "corps"
 
-#: models.py:17
+#: models.py:21
 msgid "tease"
 msgstr "en bref"
 
-#: models.py:17
+#: models.py:21
 msgid "Concise text suggested. Does not appear in RSS feed."
 msgstr "Texte court suggéré. N'apparait pas dans le flux RSS."
 
-#: models.py:18
+#: models.py:23
 msgid "status"
 msgstr "visibilité"
 
-#: models.py:19
+#: models.py:24
 msgid "allow comments"
 msgstr "autoriser les commentaires"
 
-#: models.py:20
+#: models.py:25
 msgid "publish"
 msgstr "publié"
 
-#: models.py:21
+#: models.py:26
 msgid "created"
 msgstr "créé"
 
-#: models.py:22
+#: models.py:27
 msgid "modified"
 msgstr "modifié"
 
-#: models.py:27
+#: models.py:31
 msgid "post"
 msgstr "article"
 
-#: models.py:28
+#: models.py:32
 msgid "posts"
 msgstr "articles"
 
@@ -106,11 +106,11 @@ msgid_plural "%(tot)s comments"
 msgstr[0] "commentaire"
 msgstr[1] "commentaires"
 
-#: templates/blog/post_detail.html:71
+#: templates/blog/post_detail.html:64
 msgid "Comments are closed"
 msgstr "Les commentaires sont fermés"
 
-#: templates/blog/post_detail.html:72
+#: templates/blog/post_detail.html:65
 msgid "Comments have been closed for this post"
 msgstr "Les commentaires ont été fermés pour cet article"
 
