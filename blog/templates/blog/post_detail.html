@@ -37,21 +37,8 @@
       <strong>{% trans "Date" %}</strong>
       <time pubdate datetime="{{ current_post.publish|date:"j-m-Y H:i" }}">{{ current_post.publish|naturaltime }}</time>
     </div>
-    <!--<div class="tags">
-      <strong>Tags</strong>
-      <ul>
-        <li><a href="#">Voyage</a></li>
-        <li><a href="#">Couchsurfing</a></li>
-        <li><a href="#">Culture</a></li>
-      </ul>
-    </div>-->
     <div class="coms">
       <strong>{% blocktrans count tot=comment_count %}{{ tot }} comment{% plural %}{{ tot }} comments{% endblocktrans %}</strong>
-      <!--<ul>
-        <li><a href="#">11:34 machin</a></li>
-        <li><a href="#">10/02 truc</a></li>
-        <li><a href="#">09/02 bidule</a></li>
-      </ul>-->
     </div>
   </aside>
   

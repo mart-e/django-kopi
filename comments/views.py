@@ -1,11 +1,14 @@
 import datetime
+import time
 
 from django.conf import settings
+from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
 from django.contrib.comments.views import comments as contrib_comments
 from django.contrib.comments.views.utils import next_redirect, confirmation_view
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
+from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404
@@ -23,22 +26,46 @@ MAX_SUBMIT_DATE = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.time
 
 
 def comment_edit(request, object_id, template_name='comments/edit.html'):
-    # comment = get_object_or_404(KopiComment, pk=object_id, user=request.user)
+    """Edit the comment"""
+
     comment = get_object_or_404(KopiComment, pk=object_id)
 
+    # check if can edit the comment
     if MAX_SUBMIT_DATE > comment.submit_date:
         return comment_error(request, error_message='Too old comment')
 
     if comment.session_id != request.session.session_key:
         return comment_error(request, error_message='You are not the author of the comment or your session as expired')
 
+    # is the user submiting the form
     if request.method == 'POST':
-        form = KopiCommentForm(request.POST, data=comment)
+        form = KopiCommentForm(comment, data=request.POST)
         if form.is_valid():
-            form.save()
+            # get the data in a processable form
+            data = form.get_comment_create_data()
+            comment.user_email = data['user_email']
+            comment.user_name = data['user_name']
+            comment.user_url = data['user_url']
+            comment.comment = data['comment']
+            comment.identifier = data['identifier']
+            comment.save()
             return redirect(request, comment.content_object)
+        else:
+            print(form.errors)
+
     else:
-        form = KopiCommentForm(comment)
+        comment_dic = model_to_dict(comment)
+        comment_dic['name'] = comment.user_name
+        comment_dic['email'] = comment.user_email
+        comment_dic['url'] = comment.user_url
+        form = KopiCommentForm(comment, data=comment_dic, initial=None)  
+        security_dict = form.generate_security_data()
+        # recreate the security fields
+        form.data['content_type'] = security_dict['content_type']
+        form.data['object_pk'] = security_dict['object_pk']
+        form.data['timestamp'] = security_dict['timestamp']
+        form.data['security_hash'] = security_dict['security_hash']
+
     return render(request, template_name, {
         'form': form,
         'comment': comment,
