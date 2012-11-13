@@ -19,24 +19,26 @@ from tools.shortcuts import render, redirect
 from httpbl.views import HttpBLMiddleware
 
 MAX_SUBMIT_DATE = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(
-            minutes=getattr(settings, 'COMMENT_ALTERATION_TIME_LIMIT', 15))
+            minutes=getattr(settings, 'COMMENT_ALTERATION_TIME_LIMIT', 15)*10)
 
 
 def comment_edit(request, object_id, template_name='comments/edit.html'):
-    comment = get_object_or_404(KopiComment, pk=object_id, user=request.user)
+    # comment = get_object_or_404(KopiComment, pk=object_id, user=request.user)
+    comment = get_object_or_404(KopiComment, pk=object_id)
 
     if MAX_SUBMIT_DATE > comment.submit_date:
-        return comment_error(request, context={'error_message': 'Too old comment'})
+        return comment_error(request, error_message='Too old comment')
+
     if comment.session_id != request.session.session_key:
-        return comment_error(request, context={'error_message': 'You are not the author of the comment or your session as expired'})
+        return comment_error(request, error_message='You are not the author of the comment or your session as expired')
 
     if request.method == 'POST':
-        form = KopiCommentForm(request.POST, instance=comment)
+        form = KopiCommentForm(request.POST, data=comment)
         if form.is_valid():
             form.save()
             return redirect(request, comment.content_object)
     else:
-        form = KopiCommentForm(instance=comment)
+        form = KopiCommentForm(comment)
     return render(request, template_name, {
         'form': form,
         'comment': comment,
@@ -46,8 +48,11 @@ def comment_edit(request, object_id, template_name='comments/edit.html'):
 def comment_remove(request, object_id, template_name='comments/delete.html'):
     comment = get_object_or_404(KopiComment, pk=object_id, user=request.user)
 
-    if DELTA > comment.submit_date:
-         return comment_error(request)
+    if MAX_SUBMIT_DATE > comment.submit_date:
+        return comment_error(request, error_message='Too old comment')
+
+    if comment.session_id != request.session.session_key:
+        return comment_error(request, error_message='You are not the author of the comment or your session as expired')
 
     if request.method == 'POST':
         comment.delete()
