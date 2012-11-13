@@ -310,6 +310,7 @@ footer {
 
 .comments article time {
     font-size: 0.8em;
+    display:block;
 }
 
 .comments .commenttext {
