@@ -15,6 +15,7 @@
 {% block content %}
   {% load comments markup stringutils %}
 
+<div id="comment-form">
   <form action="{% comment_form_target %}" method="post">{% csrf_token %}
     <div>{% if next %}
           <input type="hidden" name="next" value="{{ next }}" />
@@ -47,9 +48,20 @@
       {% endif %}
     {% endfor %}
 
+  <div id="comment-help-button"><a onclick="$('#comment-help').toggle(50)">Help ?</a></div>
+
+  <div id="comment-help">
+    <p>Fill at least one of the three first fields (name, email or url)</p>
+    <p>Some elements of the Markdown syntax are supported :</p>
+    <p><strong>__bold__ **bold**</strong><br/>
+      <em>_italic_ *italic*</em><br/>
+      <a href="">(link)[http://url]</a></p>
+    <p>HTML code is <strong>not</strong> allowed</p>
+  </div>
     <p class="submit">
       <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
       <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
     </p>
   </form>
+</div>
 {% endblock %}

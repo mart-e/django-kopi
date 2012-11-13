@@ -317,6 +317,11 @@ footer {
     font-size:0.9em;
 }
 
+#comment-help-button {
+    margin:15px 0;
+    font-weight:bold;
+}
+
 #comment-help {
     display:none;
 }

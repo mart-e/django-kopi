@@ -36,7 +36,9 @@
       </p>
     {% endif %}
   {% endfor %}
-  <p><a onclick="$('#comment-help').toggle(50)"><strong>Help ?</strong></a></p>
+  
+   <div id="comment-help-button"><a onclick="$('#comment-help').toggle(50)">Help ?</a></div>
+  
   <div id="comment-help">
     <p>Fill at least one of the three first fields (name, email or url)</p>
     <p>Some elements of the Markdown syntax are supported :</p>
