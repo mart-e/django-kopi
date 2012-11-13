@@ -2,13 +2,22 @@
 
 <div class="list" id="comments">
   {% for comment in comment_list %}
-    <div class="item" id="c{{ comment.id }}">
+    <article class="item" id="c{{ comment.id }}">
       {% if comment.user %}
-        <h4><a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a> <small>{{ comment.submit_date|timesince }} ago</small></h4>
+        <strong><a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a></strong>
       {% else %}
-          <h4>{% if comment.url %}<a href="{{ comment.url }}">{{ comment.identifier }}</a>{% else %}{{ comment.identifier }}{% endif %} <small>{{ comment.submit_date|date }}</small></h4>
+          <strong>
+            {% if comment.url %}
+               <a href="{{ comment.url }}">{{ comment.identifier }}</a>
+            {% else %}
+               {{ comment.identifier }}
+            {% endif %}
+          </strong>
       {% endif %}
-      <img src="{{ comment.get_avatar_url }}" width="{{ comment.AVATAR_SIZE }}" height="{{ comment.AVATAR_SIZE }}" alt="Avatar of comment #{{ comment.id }}" />
+        <a href="{{ comment.get_absolute_url}}">
+          <time datetime="{{ comment.submit_date }}">{{ comment.submit_date|timesince }} ago</time>
+        </a>
+      <img src="{{ comment.get_avatar_url }}" width="{{ comment.AVATAR_SIZE }}" height="{{ comment.AVATAR_SIZE }}" alt="Avatar of comment #{{ comment.id }}" class="avatar" />
       {{ comment.comment_html|safe }}
       <p class="byline">
         {% if comment.user == user %}
@@ -16,6 +25,6 @@
           <a class="remove" href="{% url comments-remove comment.id %}">Remove</a>
         {% endif %}
       </p>
-    </div>
+    </article>
   {% endfor %}
 </div>

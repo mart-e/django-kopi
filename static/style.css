@@ -281,7 +281,7 @@ footer {
     margin:20px 5px;
     border-radius: 4px;
     padding: 5px 2%;
-    font-size: 0.8em;
+    font-size: 1em;
     position: relative;
     padding-left: 60px;
 }
@@ -305,6 +305,11 @@ footer {
     top: 7px;
     left: 7px;
     display: inline;
+    vertical-align:top;
+}
+
+.comments article time {
+    font-size: 0.8em;
 }
 
 .comments .commenttext {
