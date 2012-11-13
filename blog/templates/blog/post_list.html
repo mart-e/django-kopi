@@ -29,7 +29,11 @@
         <aside>
           <div class="author">
             <strong>{% trans "Author" %}</strong>
-            {{ post.author }}
+            {% if current_post.author.url %}
+               <a href="{{ current_post.author.url }}" title="{% trans "About" %} {{ current_post.author }}">{{ current_post.author }}</a>
+            {% else %}
+               {{ current_post.author }}
+            {% endif %}
           </div>
           <div class="date">
             <strong>{% trans "Date" %}</strong>
