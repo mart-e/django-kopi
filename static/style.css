@@ -353,6 +353,10 @@ footer {
 	padding: 5px 15px;
 }
 
+textarea, input {
+    font-family: Cantarell , Verdana, "DejaVu Sans", "Bitstream Vera Sans", Geneva, sans-serif;
+}
+
 a {
     font-style: none;
     color: #333333;
