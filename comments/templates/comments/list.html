@@ -1,4 +1,4 @@
-{% load markup %}
+{% load markup i18n %}
 
 <div class="list" id="comments">
   {% for comment in comment_list %}
@@ -17,14 +17,14 @@
         <a href="{{ comment.get_absolute_url}}">
         <time datetime="{{ comment.submit_date }}">{{ comment.submit_date|timesince }} ago</time>
         </a>
-      <img src="{{ comment.get_avatar_url }}" width="{{ comment.AVATAR_SIZE }}" height="{{ comment.AVATAR_SIZE }}" alt="Avatar of comment #{{ comment.id }}" class="avatar" />
+      <img src="{{ comment.get_avatar_url }}" width="{{ comment.AVATAR_SIZE }}" height="{{ comment.AVATAR_SIZE }}" alt="{% trans 'Avatar of comment' %} #{{ comment.id }}" class="avatar" />
       {{ comment.comment_html|safe }}
 
       <p class="byline">
         {% if comment.still_editable %}
           {% if comment.session_id == request.session.session_key %}
-          <a class="edit" href="{% url comments-edit comment.id %}">Edit</a>
-          <a class="remove" href="{% url comments-remove comment.id %}">Remove</a>
+          <a class="edit" href="{% url comments-edit comment.id %}">{% trans "Edit" %}</a>
+          <a class="remove" href="{% url comments-remove comment.id %}">{% trans "Remove" %}</a>
           {% endif %}
         {% endif %}
       </p>

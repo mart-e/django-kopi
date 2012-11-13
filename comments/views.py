@@ -15,6 +15,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
 from django.utils.timezone import utc
+from django.utils.translation import ugettext_lazy as _
 
 from comments.models import KopiComment
 from comments.forms import KopiCommentForm
@@ -32,10 +33,10 @@ def comment_edit(request, object_id, template_name='comments/edit.html'):
 
     # check if can edit the comment
     if MAX_SUBMIT_DATE > comment.submit_date:
-        return comment_error(request, error_message='Too old comment')
+        return comment_error(request, error_message=_('Too old comment'))
 
     if comment.session_id != request.session.session_key:
-        return comment_error(request, error_message='You are not the author of the comment or your session as expired')
+        return comment_error(request, error_message=_('You are not the author of the comment or your session has expired'))
 
     # is the user submiting the form
     if request.method == 'POST':
@@ -73,13 +74,13 @@ def comment_edit(request, object_id, template_name='comments/edit.html'):
 
 
 def comment_remove(request, object_id, template_name='comments/delete.html'):
-    comment = get_object_or_404(KopiComment, pk=object_id, user=request.user)
+    comment = get_object_or_404(KopiComment, pk=object_id)
 
     if MAX_SUBMIT_DATE > comment.submit_date:
-        return comment_error(request, error_message='Too old comment')
+        return comment_error(request, error_message=_('Too old comment'))
 
     if comment.session_id != request.session.session_key:
-        return comment_error(request, error_message='You are not the author of the comment or your session as expired')
+        return comment_error(request, error_message=_('You are not the author of the comment or your session has expired'))
 
     if request.method == 'POST':
         comment.delete()
@@ -87,7 +88,7 @@ def comment_remove(request, object_id, template_name='comments/delete.html'):
     return render(request, template_name, {'comment': comment})
 
 
-def comment_error(request, error_message='You can not change this comment.',
+def comment_error(request, error_message=_('You can not change this comment.'),
         template_name='comments/error.html'):
     return render(request, template_name, {'error_message': error_message})
 
