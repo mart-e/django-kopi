@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-13 10:44+0100\n"
+"POT-Creation-Date: 2012-11-13 23:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: models.py:13
+#: models.py:14
 msgid "Draft"
 msgstr "Brouillon"
 
-#: models.py:14
+#: models.py:15
 msgid "Public"
 msgstr "Publique"
 
-#: models.py:16
+#: models.py:17
 msgid "title"
 msgstr "titre"
 
-#: models.py:17
+#: models.py:18
 msgid "slug"
 msgstr ""
 
-#: models.py:19
+#: models.py:20
 msgid "body"
 msgstr "corps"
 
-#: models.py:21
+#: models.py:22
 msgid "tease"
 msgstr "en bref"
 
-#: models.py:21
+#: models.py:22
 msgid "Concise text suggested. Does not appear in RSS feed."
 msgstr "Texte court suggéré. N'apparait pas dans le flux RSS."
 
-#: models.py:23
+#: models.py:24
 msgid "status"
 msgstr "visibilité"
 
-#: models.py:24
+#: models.py:25
 msgid "allow comments"
 msgstr "autoriser les commentaires"
 
-#: models.py:25
+#: models.py:26
 msgid "publish"
 msgstr "publié"
 
-#: models.py:26
+#: models.py:27
 msgid "created"
 msgstr "créé"
 
-#: models.py:27
+#: models.py:28
 msgid "modified"
 msgstr "modifié"
 
-#: models.py:31
+#: models.py:32
 msgid "post"
 msgstr "article"
 
-#: models.py:32
+#: models.py:33
 msgid "posts"
 msgstr "articles"
 
@@ -95,48 +95,57 @@ msgstr "Article suivant"
 msgid "Author"
 msgstr "Auteur"
 
-#: templates/blog/post_detail.html:33 templates/blog/post_list.html:35
+#: templates/blog/post_detail.html:31 templates/blog/post_list.html:33
+msgid "About"
+msgstr "A propos"
+
+#: templates/blog/post_detail.html:37 templates/blog/post_list.html:39
 msgid "Date"
 msgstr "Date"
 
-#: templates/blog/post_detail.html:45
+#: templates/blog/post_detail.html:41
 #, fuzzy, python-format
 msgid "%(tot)s comment"
 msgid_plural "%(tot)s comments"
 msgstr[0] "commentaire"
 msgstr[1] "commentaires"
 
-#: templates/blog/post_detail.html:64
+#: templates/blog/post_detail.html:55
 msgid "Comments are closed"
 msgstr "Les commentaires sont fermés"
 
-#: templates/blog/post_detail.html:65
+#: templates/blog/post_detail.html:56
 msgid "Comments have been closed for this post"
 msgstr "Les commentaires ont été fermés pour cet article"
+
+#: templates/blog/post_list.html:10
+#, fuzzy
+msgid "List of articles"
+msgstr "Lire cet article"
 
 #: templates/blog/post_list.html:21
 msgid "Read this article"
 msgstr "Lire cet article"
 
-#: templates/blog/post_list.html:39
+#: templates/blog/post_list.html:44
 #, fuzzy, python-format
 msgid "%(cpt)s comment"
 msgid_plural "%(cpt)s comments"
 msgstr[0] "commentaire"
 msgstr[1] "commentaires"
 
-#: templates/blog/post_list.html:50
+#: templates/blog/post_list.html:56
 msgid "read previous article"
 msgstr "lire l'article précédent"
 
-#: templates/blog/post_list.html:50
+#: templates/blog/post_list.html:56
 msgid "Before"
 msgstr "Avant"
 
-#: templates/blog/post_list.html:54
+#: templates/blog/post_list.html:60
 msgid "read next article"
 msgstr "lire l'article suivant"
 
-#: templates/blog/post_list.html:54
+#: templates/blog/post_list.html:60
 msgid "After"
 msgstr "Après"

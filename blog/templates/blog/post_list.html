@@ -7,7 +7,7 @@
 
 
 {% block content_title %}
-  <h2>Archive des articles</h2>
+  <h2>{% trans "List of articles"%}</h2>
 {% endblock %}
 
 
@@ -18,7 +18,7 @@
     {% for post in object_list %}
       {% get_comment_count for post as comment_count %}
       <article class="blog_post">
-        <h1><a href="{{ post.get_absolute_url }}" title="{% trans "Read this article" %}">{{ post.title }}</a></h1>
+        <h1><a href="{{ post.get_absolute_url }}" title="{% trans 'Read this article' %}">{{ post.title }}</a></h1>
         {% if forloop.first or not post.tease %}
           <div class="post_body">{{ post.body_html|render_inlines }}</div>
         {% else %}
@@ -40,7 +40,9 @@
             <time pubdate datetime="{{ post.publish|date:"j-m-Y H:i" }}">{{ post.publish|naturaltime }}</time>
           </div>
           <div class="coms">
-            <strong>{% blocktrans count cpt=comment_count %}{{ cpt }} comment{% plural %}{{ cpt }} comments{% endblocktrans %}</strong>
+            <strong>
+              {% blocktrans count cpt=comment_count %}{{ cpt }} comment{% plural %}{{ cpt }} comments{% endblocktrans %}
+            </strong>
           </div>
         </aside>
       {% endif %}

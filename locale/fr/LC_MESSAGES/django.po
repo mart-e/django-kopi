@@ -1,0 +1,354 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-13 23:22+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: author/models.py:7
+msgid "Profile address"
+msgstr "Adresse du profile"
+
+#: author/models.py:10
+msgid "author"
+msgstr "auteur"
+
+#: author/models.py:11
+msgid "authors"
+msgstr "auteurs"
+
+#: blog/models.py:14
+msgid "Draft"
+msgstr "Brouillon"
+
+#: blog/models.py:15
+msgid "Public"
+msgstr "Publique"
+
+#: blog/models.py:17
+msgid "title"
+msgstr "titre"
+
+#: blog/models.py:18
+msgid "slug"
+msgstr ""
+
+#: blog/models.py:20
+msgid "body"
+msgstr "corps"
+
+#: blog/models.py:22
+msgid "tease"
+msgstr "en bref"
+
+#: blog/models.py:22
+msgid "Concise text suggested. Does not appear in RSS feed."
+msgstr "Texte conscit suggéré. N'apparait pas dans le flux RSS"
+
+#: blog/models.py:24
+msgid "status"
+msgstr "status"
+
+#: blog/models.py:25
+msgid "allow comments"
+msgstr "autoriser les commentaires"
+
+#: blog/models.py:26
+msgid "publish"
+msgstr "publier"
+
+#: blog/models.py:27
+msgid "created"
+msgstr "créé"
+
+#: blog/models.py:28
+msgid "modified"
+msgstr "modifié"
+
+#: blog/models.py:32
+msgid "post"
+msgstr "article"
+
+#: blog/models.py:33
+msgid "posts"
+msgstr "articles"
+
+#: blog/templates/blog/post_archive_day.html:5
+#: blog/templates/blog/post_archive_day.html:10
+msgid "Post archive for"
+msgstr "Archives des articles de"
+
+#: blog/templates/blog/post_archive_day.html:18
+msgid "View this post"
+msgstr "Lire cet article"
+
+#: blog/templates/blog/post_detail.html:17
+msgid "View previous post"
+msgstr "Lire l'article précédent"
+
+#: blog/templates/blog/post_detail.html:20
+msgid "View next post"
+msgstr "Lire l'article suivant"
+
+#: blog/templates/blog/post_detail.html:29
+#: blog/templates/blog/post_list.html:31
+msgid "Author"
+msgstr "Auteur"
+
+#: blog/templates/blog/post_detail.html:31
+#: blog/templates/blog/post_list.html:33 templates/default.html:19
+msgid "About"
+msgstr "A propos"
+
+#: blog/templates/blog/post_detail.html:37
+#: blog/templates/blog/post_list.html:39
+msgid "Date"
+msgstr "Date"
+
+#: blog/templates/blog/post_detail.html:41
+#, python-format
+msgid "%(tot)s comment"
+msgid_plural "%(tot)s comments"
+msgstr[0] "%(tot)s commentaire"
+msgstr[1] "%(tot)s commentaires"
+
+#: blog/templates/blog/post_detail.html:55
+msgid "Comments are closed"
+msgstr "Les commentaires sont fermés"
+
+#: blog/templates/blog/post_detail.html:56
+msgid "Comments have been closed for this post"
+msgstr "Les commentaires ont été fermés pour cet article"
+
+#: blog/templates/blog/post_list.html:10
+msgid "List of articles"
+msgstr "Liste des articles"
+
+#: blog/templates/blog/post_list.html:21
+msgid "Read this article"
+msgstr "Lire cet article"
+
+#: blog/templates/blog/post_list.html:44
+#, python-format
+msgid "%(cpt)s comment"
+msgid_plural "%(cpt)s comments"
+msgstr[0] "%(cpt)s commentaire"
+msgstr[1] "%(cpt)s commentaires"
+
+#: blog/templates/blog/post_list.html:56
+msgid "read previous article"
+msgstr "lire l'article précédent"
+
+#: blog/templates/blog/post_list.html:56
+msgid "Before"
+msgstr "Avant"
+
+#: blog/templates/blog/post_list.html:60
+msgid "read next article"
+msgstr "lire l'article suivant"
+
+#: blog/templates/blog/post_list.html:60
+msgid "After"
+msgstr "Après"
+
+#: comments/forms.py:10
+msgid "Name"
+msgstr "Nom"
+
+#: comments/forms.py:11
+msgid "Email address"
+msgstr "Adresse email"
+
+#: comments/views.py:36 comments/views.py:80
+msgid "Too old comment"
+msgstr "Commentaire trop vieux"
+
+#: comments/views.py:39 comments/views.py:83
+msgid "You are not the author of the comment or your session has expired"
+msgstr "Vous n'etes pas l'auteur du commentaire ou votre session a expirée"
+
+#: comments/views.py:91
+msgid "You can not change this comment."
+msgstr "Vous ne pouvez pas changer ce commentaire"
+
+#: comments/templates/comments/approve.html:7
+#: comments/templates/comments/approve.html:11
+msgid "Approve a comment"
+msgstr "Accepter un commentaire"
+
+#: comments/templates/comments/approve.html:20
+msgid "Approve"
+msgstr "Accepter"
+
+#: comments/templates/comments/approved.html:7
+#: comments/templates/comments/approved.html:11
+msgid "Thanks for approving"
+msgstr "Merci pour l'approbation"
+
+#: comments/templates/comments/approved.html:16
+#: comments/templates/comments/deleted.html:16
+#: comments/templates/comments/flagged.html:16
+msgid ""
+"Thanks for taking the time to improve the quality of discussion on our site"
+msgstr "Merci de prendre le temps d'améliorer la qualité de la discussion sur notre site"
+
+#: comments/templates/comments/delete.html:7
+#: comments/templates/comments/delete.html:11
+msgid "Remove comment"
+msgstr "Supprimer le commentaire"
+
+#: comments/templates/comments/delete.html:18
+msgid "Are you sure you want to remove this comment?"
+msgstr "Etes vous sur que vous voulez supprimer ce commentaire ?"
+
+#: comments/templates/comments/delete.html:20
+#: comments/templates/comments/list.html:27
+msgid "Remove"
+msgstr "Supprimer"
+
+#: comments/templates/comments/deleted.html:7
+#: comments/templates/comments/deleted.html:11
+msgid "Thanks for removing"
+msgstr "Merci pour la suppression"
+
+#: comments/templates/comments/edit.html:5
+#: comments/templates/comments/edit.html:8
+msgid "Edit comment"
+msgstr "Modifier le commentaire"
+
+#: comments/templates/comments/edit.html:38
+#: comments/templates/comments/form.html:27
+#: comments/templates/comments/preview.html:51
+msgid "Help ?"
+msgstr "Aide ?"
+
+#: comments/templates/comments/edit.html:41
+#: comments/templates/comments/form.html:30
+#: comments/templates/comments/preview.html:54
+msgid "Fill at least one of the three first fields (name, email or url)"
+msgstr "Remplissez au moins un des trois premiers champs (nom, email ou url)"
+
+#: comments/templates/comments/edit.html:42
+#: comments/templates/comments/form.html:31
+#: comments/templates/comments/preview.html:55
+msgid "Some elements of the Markdown syntax are supported :"
+msgstr "Plusieurs éléments de la syntaxe Markdown sont supportés"
+
+#: comments/templates/comments/edit.html:43
+#: comments/templates/comments/form.html:32
+#: comments/templates/comments/preview.html:56
+msgid "__bold__ **bold**"
+msgstr "__gras__ **gras**"
+
+#: comments/templates/comments/edit.html:44
+#: comments/templates/comments/form.html:33
+#: comments/templates/comments/preview.html:57
+msgid "_italic_ *italic*"
+msgstr "_italic_ *italic*"
+
+#: comments/templates/comments/edit.html:45
+#: comments/templates/comments/form.html:34
+#: comments/templates/comments/preview.html:58
+msgid "(link)[http://url]"
+msgstr "(lien)[http://url]"
+
+#: comments/templates/comments/edit.html:46
+#: comments/templates/comments/form.html:35
+#: comments/templates/comments/preview.html:59
+msgid "HTML code is <strong>not</strong> allowed"
+msgstr "Le code HTML n'est <strong>pas</strong> autorisé"
+
+#: comments/templates/comments/edit.html:50
+msgid "Save"
+msgstr "Sauver"
+
+#: comments/templates/comments/flag.html:7
+#: comments/templates/comments/flag.html:11
+msgid "Flag this comment"
+msgstr "Signaler ce commentaire"
+
+#: comments/templates/comments/flag.html:20
+msgid "Flag"
+msgstr "Signaler"
+
+#: comments/templates/comments/flagged.html:7
+#: comments/templates/comments/flagged.html:11
+msgid "Thanks for flagging"
+msgstr "Merci pour votre signalement"
+
+#: comments/templates/comments/form.html:39
+#: comments/templates/comments/preview.html:63
+msgid "Post"
+msgstr "Article"
+
+#: comments/templates/comments/form.html:40
+#: comments/templates/comments/preview.html:64
+msgid "Preview"
+msgstr "Apperçu"
+
+#: comments/templates/comments/list.html:20
+msgid "Avatar of comment"
+msgstr "Avatar du commentaire"
+
+#: comments/templates/comments/list.html:26
+msgid "Edit"
+msgstr "Modifier"
+
+#: comments/templates/comments/posted.html:7
+#: comments/templates/comments/posted.html:11
+msgid "Thanks"
+msgstr "Merci"
+
+#: comments/templates/comments/posted.html:16
+msgid "Thank you for your comment"
+msgstr "Merci pour votre commentaire"
+
+#: comments/templates/comments/preview.html:7
+#: comments/templates/comments/preview.html:11
+msgid "Preview your comment"
+msgstr "Prévisualiser votre commentaire"
+
+#: comments/templates/comments/preview.html:27
+msgid "Please correct the error below"
+msgid_plural "Please correct the errors below"
+msgstr[0] "Merci de corriger l'erreur ci-dessous"
+msgstr[1] "Merci de corriger les erreurs ci-dessous"
+
+#: comments/templates/comments/preview.html:31
+msgid "Post your comment"
+msgstr "Envoyer votre commentaire"
+
+#: comments/templates/comments/preview.html:32
+msgid "or make changes"
+msgstr "ou faites des changements"
+
+#: media/templates/inlines/media_photo.html:9
+#: media/templates/inlines/media_photo.html:20
+msgid "View the full image"
+msgstr "Voir l'image complète"
+
+#: media/templates/inlines/media_photo.html:11
+#: media/templates/inlines/media_photo.html:22
+msgid "By"
+msgstr "Par"
+
+#: templates/default.html:18
+msgid "Links"
+msgstr "Liens"
+
+#: templates/default.html:25
+msgid "Unless explicit mention, the content of this blog is released under a"
+msgstr "Sauf si mentionné explicitement, le contenu de ce blog est publié sous une"
