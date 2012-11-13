@@ -170,7 +170,7 @@ INSTALLED_APPS = (
     'inlines',
     
     'tagging',
-    'south',
+   # 'south',
 )
 
 # Use my custom app
