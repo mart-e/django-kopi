@@ -262,14 +262,6 @@ footer {
  * Comments
  */
 
-#comment-form {
-    font-size:0.9em;
-}
-
-#comment-help {
-    display:none;
-}
-
 .comments h1 {
     font-size: 1.2em;
     padding: 10px 0 0px 10px;
@@ -321,19 +313,27 @@ footer {
     margin:10px 0;
 }
 
-.comments form{
+#comment-form {
+    font-size:0.9em;
+}
+
+#comment-help {
+    display:none;
+}
+
+#comment-form form{
     text-align:justify;
 	padding:0 20px;
 	width:70%;
 }
 
-.comments form p{
+#comment-form form p{
 	margin:0.25em 0;
 }
-.comments form p:last-child{ /* Sélecteur avancé pour sélectionner le dernier paragraphe du formulaire */
+#comment-form form p:last-child{ /* Sélecteur avancé pour sélectionner le dernier paragraphe du formulaire */
 	margin-bottom:0;
 }
-.comments label{
+#comment-form label{
 	cursor:pointer;
 	display:block;
 	font-size:0.8em;
@@ -342,7 +342,7 @@ footer {
 	font-variant:small-caps;
 	margin-left:2px;
 }
-input[type=submit]{
+#comment-form input[type=submit]{
     border: none;
     border-radius:3px;
 	margin-left:2px;

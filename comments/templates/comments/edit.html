@@ -14,11 +14,41 @@
 {% block content %}
   {% load stringutils %}
 
+<div id="comment-form">
   <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post">{% csrf_token %}
-    {{ form|format_fields }}
+  <div>{% if next %}
+          <input type="hidden" name="next" value="{{ next }}" />
+       {% else %}
+          <input type="hidden" name="next" value="{{ form.target_object.get_absolute_url }}" />
+       {% endif %}</div>
+  {% for field in form %}
+    {% if field.is_hidden %}
+      <div>{{ field }}</div>
+    {% else %}
+      {% if field.errors %}{{ field.errors }}{% endif %}
+      <p
+        {% if field.errors %} class="error"{% endif %}
+        {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+        {{ field.label_tag }} {{ field }}
+        {% ifequal field.name "comment" %}
+        {% endifequal %}
 
-    <p class="submit">
-      <button type="submit">{% trans "Save" %}</button>
-    </p>
-  </form>
+      </p>
+    {% endif %}
+  {% endfor %}
+  <p><a onclick="$('#comment-help').toggle(50)"><strong>Help ?</strong></a></p>
+  <div id="comment-help">
+    <p>Fill at least one of the three first fields (name, email or url)</p>
+    <p>Some elements of the Markdown syntax are supported :</p>
+    <p><strong>__bold__ **bold**</strong><br/>
+      <em>_italic_ *italic*</em><br/>
+      <a href="">(link)[http://url]</a></p>
+    <p>HTML code is <strong>not</strong> allowed</p>
+  </div>
+  <p class="submit">
+    <input type="submit" name="post" class="submit-post" value="{% trans "Save" %}" />
+  </p>
+</form>
+</div>
+
 {% endblock %}
