@@ -36,7 +36,7 @@ theme/
 You can copy the files contained in the default/ folder if needed.
 The file in your theme folder will overwrite the one in the default theme if present, otherwise it will use the default files.
 For example, if you want to just change the default avatar image, create a new empty theme hiearchy and put you new picture in the `static/` folder.
-But if you want to change only one css element, you will need to copy the whole style.css file and modify it.
+If you want to modify only a few CSS element, don't use the full style.css file but overwrite the properties in the file custom.css in your theme folder (empty in default theme).
 
 Finaly replace the variable `USER_THEME` in the `settings.py` file by `mytheme/`.
 Collect the new static files with the command `manage.py collectstatic`.
