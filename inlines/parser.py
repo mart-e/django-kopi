@@ -66,8 +66,8 @@ def render_inline(inline):
             return ''
 
     # Create the context with all the attributes in the inline markup.
-    print(inline.attrs)
     # context = {k: v for k, v in inline.attrs}
+    context = {}
     for (k, v) in inline.attrs: context[k] = v
 
     # If multiple IDs were specified, build a list of all requested objects
