@@ -23,7 +23,7 @@ from tools.shortcuts import render, redirect
 from httpbl.views import HttpBLMiddleware
 
 MAX_SUBMIT_DATE = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(
-            minutes=getattr(settings, 'COMMENT_ALTERATION_TIME_LIMIT', 15)*10)
+            minutes=getattr(settings, 'COMMENT_ALTERATION_TIME_LIMIT', 15))
 
 
 def comment_edit(request, object_id, template_name='comments/edit.html'):
