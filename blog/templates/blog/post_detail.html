@@ -38,7 +38,9 @@
       <time pubdate datetime="{{ current_post.publish|date:"j-m-Y H:i" }}">{{ current_post.publish|naturaltime }}</time>
     </div>
     <div class="coms">
-      <strong>{% blocktrans count tot=comment_count %}{{ tot }} comment{% plural %}{{ tot }} comments{% endblocktrans %}</strong>
+      <strong>
+        <a href="{{ post.get_absolute_url }}#comments">{% blocktrans count tot=comment_count %}{{ tot }} comment{% plural %}{{ tot }} comments{% endblocktrans %}</a>
+      </strong>
     </div>
   </aside>
   

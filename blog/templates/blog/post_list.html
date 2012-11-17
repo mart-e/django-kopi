@@ -41,7 +41,7 @@
           </div>
           <div class="coms">
             <strong>
-              {% blocktrans count cpt=comment_count %}{{ cpt }} comment{% plural %}{{ cpt }} comments{% endblocktrans %}
+              <a href="{{ post.get_absolute_url }}#comments">{% blocktrans count cpt=comment_count %}{{ cpt }} comment{% plural %}{{ cpt }} comments{% endblocktrans %}</a>
             </strong>
           </div>
         </aside>
