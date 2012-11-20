@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}mart-e{% endblock %}
+
+{% block description %}Blog de mart-e, généraliste à forte tendance informatique pro-libre{% endblock %}
+
+{% block author %}mart-e{% endblock %}
+
+{% block banner %}
+    <a href="/"><img src="/static/banner.png" alt="mart-e | about life, linux and everything" id="logo" /></a>
+    <div class="feed"><a href="{% url feed_url %}"><img src="/static/feed.png" alt="feed" /></a><a href="{% url feed_url %}"><img src="/static/statusnet.png" alt="statusnet" /></a></div>
+{% endblock %}
+
+{% block nav %}
+  <ul>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Archives</a></li>
+    <li><a href="#">Code</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+{% endblock %}
+
+
+{% block footer %}
+  Sauf si mentionné explicitement, le contenu de ce blog est publié sous la licence <a rel="license" href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>.<br/>
+  Ce blog est propulsé par la force de mes bras et beaucoup de <a href="/kopi/">Kopi</a>.
+{% endblock %}

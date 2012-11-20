@@ -1,0 +1,58 @@
+html {
+    font-size: 100%;
+}
+
+body {
+    overflow-y: scroll;
+    font-family: Cantarell;
+    background-color: #F8F8F8;
+    color: #222;
+    line-height: 1.231;
+    width: 900px;
+    margin: auto;
+}
+
+    
+.feed {
+    float: right;
+    margin-top: 20px;
+    margin-right: 0px;
+    overflow:hidden;
+    width:77px;
+}
+
+.feed:hover {
+    width:77px;
+}
+
+header #banner {
+    background-color: #F8F8F8;
+    padding: 0;
+}
+
+header #banner h1 {
+    font-size: 3em;
+}
+
+header nav {
+    background-color: #669900;
+}
+
+
+/* some info related to the article */
+section aside {
+    /* left border */
+    border-left: 2px dotted #ccc;
+    margin-left: -10px;
+    padding-left: 10px;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
