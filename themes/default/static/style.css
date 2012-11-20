@@ -123,11 +123,6 @@ section aside {
     width:18%;
     font-size: 0.9em;
     margin-top: 20px;
-    /* left border
-    border-left: 2px dotted #ccc;
-    margin-left: -10px;
-    padding-left: 10px;
-    */
 }
 
 aside div {
@@ -197,6 +192,9 @@ section .blog_post p {
 
 img {
     max-width:100%;
+}
+
+.photo img {
     height: auto;
 }
 
