@@ -28,9 +28,9 @@ urlpatterns = patterns('blog.views',
     url(r'^(?P<year>\d{4})/$',
         YearArchivePostView.as_view()
     ),
-    (r'^feed/$', AtomPostFeed()),
-    (r'^feed/atom/$', AtomPostFeed()),
-    (r'^feed/rss/$', RSSPostFeed()),
+    url(r'^feed/$', AtomPostFeed(), name='feed_url'),
+    url(r'^feed/atom/$', AtomPostFeed()),
+    url(r'^feed/rss/$', RSSPostFeed()),
 
     url(r'^about/$',view=AboutView.as_view(), name='about_url'),
 )
