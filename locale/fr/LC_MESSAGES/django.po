@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-13 23:22+0100\n"
+"POT-Creation-Date: 2012-11-23 18:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,23 +30,23 @@ msgstr "auteur"
 msgid "authors"
 msgstr "auteurs"
 
-#: blog/models.py:14
+#: blog/models.py:14 blog/models.py:70
 msgid "Draft"
 msgstr "Brouillon"
 
-#: blog/models.py:15
+#: blog/models.py:15 blog/models.py:71
 msgid "Public"
 msgstr "Publique"
 
-#: blog/models.py:17
+#: blog/models.py:17 blog/models.py:73
 msgid "title"
 msgstr "titre"
 
-#: blog/models.py:18
+#: blog/models.py:18 blog/models.py:74
 msgid "slug"
 msgstr ""
 
-#: blog/models.py:20
+#: blog/models.py:20 blog/models.py:76
 msgid "body"
 msgstr "corps"
 
@@ -58,11 +58,11 @@ msgstr "en bref"
 msgid "Concise text suggested. Does not appear in RSS feed."
 msgstr "Texte conscit suggéré. N'apparait pas dans le flux RSS"
 
-#: blog/models.py:24
+#: blog/models.py:24 blog/models.py:78
 msgid "status"
 msgstr "status"
 
-#: blog/models.py:25
+#: blog/models.py:25 blog/models.py:79
 msgid "allow comments"
 msgstr "autoriser les commentaires"
 
@@ -85,6 +85,14 @@ msgstr "article"
 #: blog/models.py:33
 msgid "posts"
 msgstr "articles"
+
+#: blog/models.py:83
+msgid "page"
+msgstr "page"
+
+#: blog/models.py:84
+msgid "pages"
+msgstr "pages"
 
 #: blog/templates/blog/post_archive_day.html:5
 #: blog/templates/blog/post_archive_day.html:10
@@ -109,7 +117,9 @@ msgid "Author"
 msgstr "Auteur"
 
 #: blog/templates/blog/post_detail.html:31
-#: blog/templates/blog/post_list.html:33 templates/default.html:19
+#: blog/templates/blog/post_list.html:33
+#: themes/default/templates/default.html:19
+#: themes/mart/templates/default.html:20
 msgid "About"
 msgstr "A propos"
 
@@ -118,18 +128,18 @@ msgstr "A propos"
 msgid "Date"
 msgstr "Date"
 
-#: blog/templates/blog/post_detail.html:41
+#: blog/templates/blog/post_detail.html:42
 #, python-format
 msgid "%(tot)s comment"
 msgid_plural "%(tot)s comments"
 msgstr[0] "%(tot)s commentaire"
 msgstr[1] "%(tot)s commentaires"
 
-#: blog/templates/blog/post_detail.html:55
+#: blog/templates/blog/post_detail.html:57
 msgid "Comments are closed"
 msgstr "Les commentaires sont fermés"
 
-#: blog/templates/blog/post_detail.html:56
+#: blog/templates/blog/post_detail.html:58
 msgid "Comments have been closed for this post"
 msgstr "Les commentaires ont été fermés pour cet article"
 
@@ -148,19 +158,19 @@ msgid_plural "%(cpt)s comments"
 msgstr[0] "%(cpt)s commentaire"
 msgstr[1] "%(cpt)s commentaires"
 
-#: blog/templates/blog/post_list.html:56
+#: blog/templates/blog/post_list.html:54
 msgid "read previous article"
 msgstr "lire l'article précédent"
 
-#: blog/templates/blog/post_list.html:56
+#: blog/templates/blog/post_list.html:54
 msgid "Before"
 msgstr "Avant"
 
-#: blog/templates/blog/post_list.html:60
+#: blog/templates/blog/post_list.html:58
 msgid "read next article"
 msgstr "lire l'article suivant"
 
-#: blog/templates/blog/post_list.html:60
+#: blog/templates/blog/post_list.html:58
 msgid "After"
 msgstr "Après"
 
@@ -171,6 +181,10 @@ msgstr "Nom"
 #: comments/forms.py:11
 msgid "Email address"
 msgstr "Adresse email"
+
+#: comments/models.py:23
+msgid "is content commented owner"
+msgstr ""
 
 #: comments/views.py:36 comments/views.py:80
 msgid "Too old comment"
@@ -203,7 +217,9 @@ msgstr "Merci pour l'approbation"
 #: comments/templates/comments/flagged.html:16
 msgid ""
 "Thanks for taking the time to improve the quality of discussion on our site"
-msgstr "Merci de prendre le temps d'améliorer la qualité de la discussion sur notre site"
+msgstr ""
+"Merci de prendre le temps d'améliorer la qualité de la discussion sur notre "
+"site"
 
 #: comments/templates/comments/delete.html:7
 #: comments/templates/comments/delete.html:11
@@ -345,10 +361,20 @@ msgstr "Voir l'image complète"
 msgid "By"
 msgstr "Par"
 
-#: templates/default.html:18
+#: themes/default/templates/default.html:17
+#: themes/mart/templates/default.html:18
+msgid "Blog"
+msgstr "Blog"
+
+#: themes/default/templates/default.html:18
+#: themes/mart/templates/default.html:19
 msgid "Links"
 msgstr "Liens"
 
-#: templates/default.html:25
+#: themes/default/templates/default.html:25
 msgid "Unless explicit mention, the content of this blog is released under a"
-msgstr "Sauf si mentionné explicitement, le contenu de ce blog est publié sous une"
+msgstr ""
+"Sauf si mentionné explicitement, le contenu de ce blog est publié sous une"
+
+#~ msgid "Archives"
+#~ msgstr "Archives"
