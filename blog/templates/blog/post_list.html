@@ -14,8 +14,8 @@
 {% block content %}
   {% load comments %}
   
-  <section class="list post_list">
     {% for post in object_list %}
+    <section class="main wrapper clearfix">
       {% get_comment_count for post as comment_count %}
       <article class="blog_post">
         <h1><a href="{{ post.get_absolute_url }}" title="{% trans 'Read this article' %}">{{ post.title }}</a></h1>
@@ -25,7 +25,7 @@
           <div class="post_body">{{ post.tease_html|render_inlines }}</div>
         {% endif %}
       </article>
-      {% if forloop.first %}
+
         <aside>
           <div class="author">
             <strong>{% trans "Author" %}</strong>
@@ -45,10 +45,8 @@
             </strong>
           </div>
         </aside>
-      {% endif %}
-    
+    </section>
     {% endfor %}
-  </section>
   
   {% if is_paginated %}
   <p class="pagination">

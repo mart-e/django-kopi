@@ -38,6 +38,14 @@ header nav {
     background-color: #669900;
 }
 
+header nav a {
+    color: #F8F8F8;
+}
+
+header nav a:hover {
+    color: #F8F8F8;
+    background-color: #69983A;
+}
 
 /* some info related to the article */
 section aside {
@@ -46,6 +54,13 @@ section aside {
     margin-left: -10px;
     padding-left: 10px;
 }
+section aside a {
+    color: #69983A;
+}
+
+section .blog_post h1 {
+    border-bottom: 2px dotted #ccc;
+}
 
 
 a {
@@ -53,6 +68,7 @@ a {
 }
 
 a:hover {
+    color: #69983A;
     text-decoration: none;
 }
 

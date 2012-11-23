@@ -37,7 +37,9 @@ body {
     background-color: #F8F8F8;
     color: #434242;
     line-height: 1.231;
-    width: 900px;
+    width: 90%;
+    max-width:1000px;
+    margin: 0;
     margin: auto;
 }
 
@@ -97,7 +99,7 @@ header nav a {
 header nav a:hover {
     color: #F8F8F8; 
     border-radius: 0 0 10px 10px;
-    background-color: #69983A;
+    background-color: #B7B7B7;
 }
 
 
@@ -112,17 +114,20 @@ header nav a:hover {
 /* article and aside, side by side */
 .blog_post, aside
 {
-    display: inline-block;
-    vertical-align: top;
+/*    display: inline-block;
+    vertical-align: top;*/
     text-align: justify;
 }
 
 /* some info related to the article */
 section aside {
-    position: relative;
+/*    position: relative;
     width:18%;
-    font-size: 0.9em;
+    font-size: 0.9em;*/ 
     margin-top: 20px;
+    padding: 10px 3% 10px;
+    background-color: #E7E7E7;
+    border-radius: 5px;
 }
 
 aside div {
@@ -153,10 +158,9 @@ aside .coms ul li {
 }
 
 aside a {
-    color: #69983A;
     text-decoration: none;
 }
-aside a:hover {
+section aside a:hover {
     text-decoration: underline;
 }
 
@@ -165,25 +169,60 @@ aside a:hover {
 /*
  * Blog post
  */
+.main {
+    padding: 30px 0;
+}
 
 section .blog_post {
     font-size: 0.9em;
-    padding: 0 2%;
+/*    padding: 0 2%;
     margin-right: 15px;
-    width: 75%;
+    width: 75%;*/
 }
 
 section .blog_post h1 {
     font-size: 1.5em;
     padding: 5px 0 5px 5px;
     margin-bottom: 5px;
-    border-bottom: 2px dotted #ccc;
 }
 
 
 section .blog_post p {
     margin:12px 0;
 }
+
+
+/* Render for larger displays */
+@media only screen and (min-width: 768px) {
+
+    section .blog_post {
+        float: left;
+        width: 57%;
+    }
+
+    section aside {
+        float: right;
+        width: 28%;
+    }
+}
+
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+
+
+.wrapper {
+    width: 90%;
+    margin: 0 5%;
+}
+
+
 
 
 /*
@@ -251,8 +290,10 @@ pre code {
 
 footer {
     margin: 30px 0;
+    padding: 20px 0;
     font-size:0.8em;
     text-align: justify;
+    display: block;
 }
 
 
@@ -361,12 +402,12 @@ textarea, input {
 }
 
 a {
-    font-style: none;
-    color: #333333;
+    color: #000;
+    text-decoration: none;
 }
 
 a:hover {
-    color: #69983A;
+    color: #B7B7B7;
 }
 
 a img {
