@@ -71,11 +71,10 @@ class Page(models.Model):
         (2, _('Public')),
     )
     title = models.CharField(_('title'), max_length=200)
-    slug = models.SlugField(_('slug'), unique_for_date='publish')
+    slug = models.SlugField(_('slug'))
     author = models.ForeignKey(Author, blank=True, null=True)
     body = models.TextField(_('body'), )
     body_html = models.TextField(editable=False, blank=True)
-    tease_html = models.TextField(editable=False, blank=True)
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1)
     allow_comments = models.BooleanField(_('allow comments'), default=False)
     
@@ -85,7 +84,6 @@ class Page(models.Model):
         verbose_name_plural = _('pages')
         db_table  = 'blog_pages'
         ordering  = ('-title',)
-        get_latest_by = 'publish'
 
     def __unicode__(self):
         return u'%s' % self.title
