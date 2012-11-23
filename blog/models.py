@@ -59,3 +59,44 @@ class Post(models.Model):
         self.body_html = markdown(self.body)
         self.tease_html = markdown(self.tease)
         super(Post, self).save(force_insert, force_update)
+        
+        
+        
+class Page(models.Model):
+    """Page model.
+    
+    In opposition to a Post, a Page is a static dateless entry."""
+    STATUS_CHOICES = (
+        (1, _('Draft')),
+        (2, _('Public')),
+    )
+    title = models.CharField(_('title'), max_length=200)
+    slug = models.SlugField(_('slug'), unique_for_date='publish')
+    author = models.ForeignKey(Author, blank=True, null=True)
+    body = models.TextField(_('body'), )
+    body_html = models.TextField(editable=False, blank=True)
+    tease_html = models.TextField(editable=False, blank=True)
+    status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1)
+    allow_comments = models.BooleanField(_('allow comments'), default=False)
+    
+    
+    class Meta:
+        verbose_name = _('page')
+        verbose_name_plural = _('pages')
+        db_table  = 'blog_pages'
+        ordering  = ('-title',)
+        get_latest_by = 'publish'
+
+    def __unicode__(self):
+        return u'%s' % self.title
+        
+    @models.permalink
+    def get_absolute_url(self):
+        return ('blog_page_detail', [
+            self.slug
+        ])
+
+    def save(self, force_insert=False, force_update=False):
+        self.body_html = markdown(self.body)
+        super(Page, self).save(force_insert, force_update)
+

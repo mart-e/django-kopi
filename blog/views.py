@@ -1,5 +1,5 @@
 from django.views.generic import dates, list
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 
 from blog.models import *
 
@@ -36,4 +36,5 @@ class DayArchivePostView(dates.DayArchiveView):
     date_field = 'publish'
     context_object_name = 'post_list'
 
-
+class PageDetailView(DetailView):
+    model = Page
