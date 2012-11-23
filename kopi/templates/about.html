@@ -3,15 +3,21 @@
 {% block title %}About Kopi{% endblock %}
 
 {% block content %}
+<section class="main wrapper clearfix">
 <h2>What is Kopi ?</h2>
-<p>Kopi is an open source blogging software in <a href="http://python.org/">Python</a> using the framework <a href="http://docs.djangoproject.com/">Django</a>. All the code can be found on <a href="https://gitorious.org/scripts-and-stuff/django-kopi">Gitorious</a>, feel free to fork it but mostly to improve it.</p>
-
-<h2>Why not Wordpress ?</h2>
-<p>I have been using Wordpress for a long time. It was ok but I feld like using a tank. Also there was some tweaking I wanted to do and looking at that wordpress code made me cry blood (did I told you I don't like PHP ?). I love Django and thaught that with a few lines of code and hours, I could have something that suits all my needs. I admit, it was more than just a few lines and hours.</p>
+<p>Kopi is an open source blogging software in <a href="http://python.org/">Python</a> using the framework <a href="http://docs.djangoproject.com/">Django</a>. All the code can be found on <a href="https://gitorious.org/scripts-and-stuff/django-kopi">Gitorious</a>, feel free to fork it or improve it.</p>
 
 <h2>Why named Kopi ?</h2>
-<p>Kopi is coffee in Indonesian, as I will certainly die of a hart attack drinking too much of it, I think it deservered it. Also "Kopi" sounds like "copy", which you can all do about my articles and code. Free licences inside.</p>
-{% endblock %}
+<p><em>Kopi</em> is coffee in Indonesian, as I will certainly die of a hart attack drinking too much of it, I think it deservered it. Also "Kopi" sounds like "copy", which you can all do about my articles and code. Free licences inside.</p>
 
-<h2>Inspiration</h2>
-<p>To create this project, I took parts from the <a href="https://github.com/nathanborror/django-basic-apps">Django basic apps</a> and the <a href="https://bitbucket.org/piranha/byteflow">Byteflow</a> projects. The inlines application comes from the <a href="https://github.com/pigmonkey">work of Peter Hogg</a></p>
+<h2>Why not Wordpress ?</h2>
+<p>I have been using Wordpress for a long time. It was ok but I felt like using a tank, I used maybe 2% of what it was capable of. Also there was some tweaking I wanted to do and looking at that wordpress code made me cry blood (did I told you I don't like PHP ?). I love Django and thaught that with a few lines of code and hours, I could have something that suits all my needs. I admit, it was more than just a few lines and hours.</p>
+
+<h2>Why not use another Django blog app ?</h2>
+<p>There exists many Django blog applications but none are really out of the mass or are way too complexe. To match my exact needs, I prefered create my own blog application (and it was fun and a good learning excercice).</p>
+
+<h2>You wrote all the code ?</h2>
+<p>Not exactly. To create this project, I took parts from the <a href="https://github.com/nathanborror/django-basic-apps">Django basic apps</a> that I modified and updated to use the latest functionalities of Django. <!-- finally no... and the <a href="https://bitbucket.org/piranha/byteflow">Byteflow</a> projects-->. The inlines application comes from the fork of <a href="https://github.com/pigmonkey">Peter Hogg</a>. Thank you to all of them.</p>
+
+</section>
+{% endblock %}
