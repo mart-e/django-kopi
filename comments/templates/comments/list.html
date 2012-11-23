@@ -2,7 +2,7 @@
 
 <div class="list" id="comments">
   {% for comment in comment_list %}
-    <article class="item" id="c{{ comment.id }}">
+    <article class="item {% if comment.content_owner %}content_author{% endif %}" id="c{{ comment.id }}">
       {% if comment.user %}
         <strong><a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a></strong>
       {% else %}
