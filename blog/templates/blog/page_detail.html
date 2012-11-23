@@ -1,5 +1,11 @@
-{% extends "default.html" %}
+{% extends "blog/base_blog.html" %}
+
+{% load comments markup humanize i18n inlines_tags %}
 
 {% block content %}
-This is the page about my blog, what is inside. Actually, it should be a page model, I'll change that in the future.
+<article class="blog_page">
+    <div class="post_body">
+      {{ page.body_html|render_inlines }}
+    </div>
+</article>
 {% endblock %}
