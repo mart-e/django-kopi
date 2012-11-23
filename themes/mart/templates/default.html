@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block title %}mart-e{% endblock %}
 
 {% block description %}Blog de mart-e, généraliste à forte tendance informatique pro-libre{% endblock %}
@@ -13,15 +15,14 @@
 
 {% block nav %}
   <ul>
-    <li><a href="#">Blog</a></li>
-    <li><a href="#">Archives</a></li>
-    <li><a href="#">Code</a></li>
-    <li><a href="#">About</a></li>
+    <li><a href="{% url blog_index %}">{% trans "Blog" %}</a></li>
+    <li><a href="#">{% trans "Links" %}</a></li>
+    <li><a href="{% url about_kopi %}">{% trans "About" %}</a></li>
   </ul>
 {% endblock %}
 
 
 {% block footer %}
   Sauf si mentionné explicitement, le contenu de ce blog est publié sous la licence <a rel="license" href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>.<br/>
-  Ce blog est propulsé par la force de mes bras et beaucoup de <a href="/kopi/">Kopi</a>.
+  Ce blog est propulsé par la force de mes bras et beaucoup de <a href="{% url about_kopi %}">Kopi</a>.
 {% endblock %}
