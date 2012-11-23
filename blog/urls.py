@@ -39,6 +39,4 @@ urlpatterns = patterns('blog.views',
     url(r'^post/feed/$', AtomPostFeed(), name='feed_url'),
     url(r'^post/feed/atom/$', AtomPostFeed()),
     url(r'^post/feed/rss/$', RSSPostFeed()),
-
-    url(r'^page/about/', view=TemplateView.as_view(template_name="about.html"), name='about_blog'),
 )
