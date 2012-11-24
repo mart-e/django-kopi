@@ -3,13 +3,9 @@ html {
 }
 
 body {
-    overflow-y: scroll;
     font-family: Cantarell;
-    background-color: #F8F8F8;
     color: #222;
-    line-height: 1.231;
-    width: 900px;
-    margin: auto;
+    width: 80%;
 }
 
     
@@ -47,12 +43,18 @@ header nav a:hover {
     background-color: #69983A;
 }
 
+.wrapper {
+    width: 95%;
+    margin:auto;
+}
+
+
 /* some info related to the article */
 section aside {
-    /* left border */
     border-left: 2px dotted #ccc;
-    margin-left: -10px;
-    padding-left: 10px;
+    /*margin-left: -10px;
+    padding-left: 10px;*/
+    background-color:transparent;
 }
 section aside a {
     color: #69983A;
@@ -62,13 +64,31 @@ section .blog_post h1 {
     border-bottom: 2px dotted #ccc;
 }
 
+/* Render for larger displays */
+@media only screen and (min-width: 768px) {
+    section .blog_post {
+        width: 60%;
+    }
+
+    section aside {
+        width: 30%;
+    }
+}
+
+
+/* if writer is content author */
+.comments article.content_author {
+    background-color:#ddd;
+    padding-bottom:5px;
+}
 
 a {
+    color: #69983A;
     text-decoration: none;
 }
 
 a:hover {
-    color: #69983A;
+    color: #7E9C60;
     text-decoration: none;
 }
 
