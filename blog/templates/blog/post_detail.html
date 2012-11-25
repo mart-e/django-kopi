@@ -35,7 +35,7 @@
     </div>
     <div class="date">
       <strong>{% trans "Date" %}</strong>
-      <time pubdate datetime="{{ current_post.publish|date:"j-m-Y H:i" }}">{{ current_post.publish|naturaltime }}</time>
+      <time datetime="{{ current_post.publish|date:"Y-m-j H:i" }}">{{ current_post.publish|naturaltime }}</time>
     </div>
     <div class="coms">
       <strong>
