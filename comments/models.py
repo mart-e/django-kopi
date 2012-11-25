@@ -34,10 +34,10 @@ class KopiComment(Comment):
                 if gravatar:
                     #print("gravatar {0}".format(gravatar))
         		return gravatar
-        except requests.ConnectionError as e:
+        except requests.exceptions.ConnectionError as e:
             # not connected
             print("DEBUG: connection ", e)
-        except requests.SSLError as e:
+        except requests.exceptions.SSLError as e:
             # can not reach a website, timeout
             print("DEBUG: timeout ", e)
 
