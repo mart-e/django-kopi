@@ -52,8 +52,9 @@ class KopiComment(Comment):
             
 
     def save(self, force_insert=False, force_update=False):
-        self.comment_html = markdown(self.comment, safe_mode=True)
-        print("Checking content owner for {0} / {1} / {2}".format(self.user, self.content_type, type(Post)))
+        self.comment_html = markdown(self.comment, safe_mode="escape")
+        
+        # check if content owner of the blog post
         if self.user and self.content_type.app_label == "blog" and self.content_type.name == "post":
             try:
                 p = Post.objects.get(id=self.object_pk)
@@ -63,7 +64,8 @@ class KopiComment(Comment):
                 # should never happen, are not suppose to retrieve comment
                 # for non-existing content but who knows...
                 print("ERROR! Post #{0} does not exist".format(self.object_pk))
-            print(p.author.user, self.user, self.content_owner)
+                
+        # check if content owner of the blog page
         if self.user and self.content_type.app_label == "blog" and self.content_type.name == "page":
             try:
                 p = Page.objects.get(id=self.object_pk)
@@ -71,7 +73,7 @@ class KopiComment(Comment):
                     self.content_owner = True
             except:
                 print("ERROR! Page #{0} does not exist".format(self.object_pk))
-            print(p.author, self.user, self.content_owner)
+                
         super(KopiComment, self).save(force_insert, force_update)
 
 
