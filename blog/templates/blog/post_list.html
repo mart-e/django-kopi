@@ -20,9 +20,9 @@
       <article class="blog_post">
         <h1><a href="{{ post.get_absolute_url }}" title="{% trans 'Read this article' %}">{{ post.title }}</a></h1>
         {% if forloop.first or not post.tease %}
-          <div class="post_body">{{ post.body_html|render_inlines }}</div>
+          <div class="post_body">{{ post.body_html|safe }}</div>
         {% else %}
-          <div class="post_body">{{ post.tease_html|render_inlines }}</div>
+          <div class="post_body">{{ post.tease_html|safe }}</div>
         {% endif %}
       </article>
 

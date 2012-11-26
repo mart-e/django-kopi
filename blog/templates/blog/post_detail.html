@@ -21,7 +21,7 @@
       {% endif %}
     </p>
     <div class="post_body">
-      {{ current_post.body_html|render_inlines }}
+      {{ current_post.body_html|safe }}
     </div>
   </article>
   <aside>

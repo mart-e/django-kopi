@@ -252,6 +252,14 @@ img {
     float: right;
 }
 
+.medium_left, .medium_center, .medium_right {
+    width: 50%;
+}
+
+.large_left, .large_center, .large_right {
+    width: 70%;
+}
+
 .photo {
 
 }

@@ -18,9 +18,9 @@
       <h3 class="title"><a href="{{ post.get_absolute_url }}" title="{% trans "View this post" %}">{{ post.title }}</a></h3>
       <p class="date">{{ post.publish|date:"Y F d" }}</p>
       {% if post.tease %}
-      <p class="tease">{{ post.tease_html|render_inlines }}</p>
+      <p class="tease">{{ post.tease_html|safe }}</p>
       {% else %}
-      <p class="tease">{{ post.body_html|render_inlines }}</p>
+      <p class="tease">{{ post.body_html|safe }}</p>
       {% endif %}
     </div>
     {% endfor %}
