@@ -1,3 +1,4 @@
+manage.py
 *.py[c]
 *.db
 secret.txt
