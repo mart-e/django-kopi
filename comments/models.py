@@ -36,10 +36,10 @@ class KopiComment(Comment):
         		return gravatar
         except requests.exceptions.ConnectionError as e:
             # not connected
-            print("DEBUG: connection ", e)
-        except requests.exceptions.SSLError as e:
+            print("DEBUG: connection avatar ", e)
+        except Exception as e:
             # can not reach a website, timeout
-            print("DEBUG: timeout ", e)
+            print("DEBUG: error avatar ", e)
 
         #print("default {0}".format(DEFAULT_AVATAR_URL))
         return DEFAULT_AVATAR_URL
