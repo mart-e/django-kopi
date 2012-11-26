@@ -1,8 +1,11 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+from django.utils.timezone import utc
+
 from tagging.fields import TagField
 from author.models import Author
+from inlines import parser
 
 from markdown import markdown
 
@@ -23,7 +26,7 @@ class Post(models.Model):
     tease_html = models.TextField(editable=False, blank=True)
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1)
     allow_comments = models.BooleanField(_('allow comments'), default=True)
-    publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
+    publish = models.DateTimeField(_('publish'), default=datetime.datetime.utcnow().replace(tzinfo=utc)) #datetime.datetime.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
     tags = TagField()
@@ -56,8 +59,9 @@ class Post(models.Model):
         return self.get_next_by_publish(status__gte=2)
 
     def save(self, force_insert=False, force_update=False):
-        self.body_html = markdown(self.body)
-        self.tease_html = markdown(self.tease)
+        self.body_html = parser.inlines(self.body)
+        self.body_html = markdown(self.body_html, output_format="html5")
+        self.tease_html = markdown(self.tease, output_format="html5")
         super(Post, self).save(force_insert, force_update)
         
         
@@ -95,6 +99,6 @@ class Page(models.Model):
         ])
 
     def save(self, force_insert=False, force_update=False):
-        self.body_html = markdown(self.body)
+        self.body_html = markdown(self.body, output_format="html5")
         super(Page, self).save(force_insert, force_update)
 
