@@ -118,18 +118,18 @@ class WordpressParser:
         post = Post()
         post.title = title
         if slug:
-            post.slug = slug
+            post.slug = slug[:50]
         else:
-            post.slug = slugify(title)
+            post.slug = slugify(title)[:50]
         if author != self.author_name:
             raise Exception("Unknown author {0}".format(author))
         post.author = self.author
         post.body = content
         post.body_html = markdown(parser.inlines(content), output_format="html5")
         if status == "publish":
-            post.status = 1#Post.STATUS_CHOICES[1]
+            post.status = 2
         else:
-            post.status = 2#Post.STATUS_CHOICES[0]
+            post.status = 1
         if allow_comments == "open":
             post.allow_comments = True
         else:
