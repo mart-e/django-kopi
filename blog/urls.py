@@ -19,15 +19,18 @@ urlpatterns = patterns('blog.views',
     ),
         
     url(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{1,2})/$',
-        DayArchivePostView.as_view()
+        DayArchivePostView.as_view(),
+        name='blog_archive_day'
     ),
 
     url(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/$',
-        MonthArchivePostView.as_view()
+        MonthArchivePostView.as_view(),
+        name='blog_archive_month'
     ),
 
     url(r'^post/(?P<year>\d{4})/$',
-        YearArchivePostView.as_view()
+        YearArchivePostView.as_view(),
+        name='blog_archive_year'
     ),
     
     url(r'^page/(?P<slug>[-\w]+)/$',

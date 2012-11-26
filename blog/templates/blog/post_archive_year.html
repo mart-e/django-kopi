@@ -13,7 +13,7 @@
   <ul class="link_list">
     {% for month in date_list %}
     	<li>
-    		<a href="/{{ month|date:'Y/m' }}" title="Voir les articles de {{ month|date:'F' }}">{{ month|date:"F" }}</a>
+    	  <a href="{% url blog_archive_month month|date:'Y' month|date:'m' %}" title="Voir les articles de {{ month|date:'F' }}">{{ month|date:"F" }}</a>
     	</li>
     {% endfor %}
   </ul>
