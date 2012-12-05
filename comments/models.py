@@ -98,10 +98,8 @@ def getGravatar(email):
         return False
 
 
-class Subscriber(models.Model):
+class Subscription(models.Model):
     """A visitor subscribing to recieve new comments by email"""
-
-    
 
     content_type   = models.ForeignKey(ContentType,
             verbose_name=_('content type'),
@@ -113,19 +111,19 @@ class Subscriber(models.Model):
     
     def generate_key(self):
         import string, random
-        key_lenght = getattr(settings,'COMMENT_SUBSCRIBER_KEY_LENGTH', 20)
+        key_lenght = getattr(settings,'COMMENT_SUBSCRIPTION_KEY_LENGTH', 20)
         key = ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_lenght))
-        subscribers = Subscriber.objects.filter( manager_key=key )
+        subscriptions = Subscription.objects.filter( manager_key=key )
         cpt = 0
-        while len(subscribers) > 0 and cpt < 100:
+        while len(subscriptions) > 0 and cpt < 100:
             # Try until find a unique key
             # statistically impossible but I don't want an infinite loop
             # so no more than 100 loop
             key = ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_lenght))
-            subscribers = Subscriber.objects.filter( manager_key=key )
+            subscriptions = Subscription.objects.filter( manager_key=key )
             cpt += 1
             
-        if len(subscriber) > 0:
+        if len(subscriptions) > 0:
             # sorry you have to fail
             return None
         return key
@@ -133,4 +131,4 @@ class Subscriber(models.Model):
     def save(self, force_insert=False, force_update=False):
         if not self.manager_key:
             self.manager_key = self.generate_key()
-        super(Subscriber, self).save(force_insert, force_update)
+        super(Subscription, self).save(force_insert, force_update)
