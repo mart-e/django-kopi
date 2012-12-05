@@ -183,6 +183,8 @@ INSTALLED_APPS = (
 COMMENTS_APP = 'comments'
 # Comments are editable during 15min
 COMMENT_ALTERATION_TIME_LIMIT = 15
+# length of the managing key, 62**20 should be enough
+COMMENT_SUBSCRIBER_KEY_LENGTH = 20
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

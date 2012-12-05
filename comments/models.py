@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.comments.models import Comment
+from django.contrib.contenttypes.models import ContentType
 from django.utils.timezone import utc
 from django.utils.translation import ugettext_lazy as _
 
@@ -96,3 +97,26 @@ def getGravatar(email):
     else:
         return False
 
+
+class Subscriber(models.Model):
+    """A visitor subscribing to recieve new comments by email"""
+
+    
+
+    content_type   = models.ForeignKey(ContentType,
+            verbose_name=_('content type'),
+            related_name="content_type_set_for_%(class)s")
+    object_pk      = models.TextField(_('object ID'))
+    email          = models.EmailField(_("subscriber's email address"), blank=True)
+    manager_key    = models.TextField(_('Identifier for managing the user'))
+
+    
+    def generate_key(self):
+        import string, random
+        key_lenght = getattr(settings,'COMMENT_SUBSCRIBER_KEY_LENGTH', 20)
+        return ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_lenght))
+
+    def save(self, force_insert=False, force_update=False):
+        if not self.manager_key:
+            self.manager_key = self.generate_key()
+        super(Subscriber, self).save(force_insert, force_update)
