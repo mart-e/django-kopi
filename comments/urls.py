@@ -16,5 +16,17 @@ urlpatterns = patterns('comments.views',
     	view='custom_comment_post',
     	name='comments-post-comment'),
 
+    url(r'^subscribe/(?P<object_id>[-\w]+)/$',
+    	view='comment_sub_manage',
+    	name='comment-sub-manage'),
+
+    url(r'^subscribe/(?P<object_id>[-\w]+)/remove/$',
+    	view='comment_sub_remove',
+    	name='comment-sub-remove'),    
+
+    url(r'^subscribe/(?P<object_id>[-\w]+)/update/$',
+    	view='comment_sub_update',
+    	name='comment-sub-update'),    
+
     url( r'^', include( 'django.contrib.comments.urls' ) ),
 )

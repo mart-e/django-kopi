@@ -114,7 +114,21 @@ class Subscriber(models.Model):
     def generate_key(self):
         import string, random
         key_lenght = getattr(settings,'COMMENT_SUBSCRIBER_KEY_LENGTH', 20)
-        return ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_lenght))
+        key = ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_lenght))
+        subscribers = Subscriber.objects.filter( manager_key=key )
+        cpt = 0
+        while len(subscribers) > 0 and cpt < 100:
+            # Try until find a unique key
+            # statistically impossible but I don't want an infinite loop
+            # so no more than 100 loop
+            key = ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_lenght))
+            subscribers = Subscriber.objects.filter( manager_key=key )
+            cpt += 1
+            
+        if len(subscriber) > 0:
+            # sorry you have to fail
+            return None
+        return key
 
     def save(self, force_insert=False, force_update=False):
         if not self.manager_key:

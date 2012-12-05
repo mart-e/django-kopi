@@ -118,3 +118,22 @@ def custom_comment_post(request, next=None, using=None):
     
     return response
 
+def comment_sub_manage(request, object_id):
+    """Manage the comment subscription to an object
+
+    Provide way to change email or unsubscribe"""
+    subscriber = get_object_or_404(Subscriber, manager_key=object_id)
+    return render(request, "subscriber_manage.html", {'sub': subscriber})
+
+def comment_sub_remove(request, object_id):
+    """Unsubscribe to comments to an object"""
+    subscriber = get_object_or_404(Subscriber, manager_key=object_id)
+    subscriber.delete()
+    return render(request, "subscriber_remove.html", {})
+
+def comment_sub_update(request, object_id):
+    """Update the comment subscription to an object
+
+    TODO"""
+    subscriber = get_object_or_404(Subscriber, manager_key=object_id)
+    return render(request, "subscriber_update.html", {})
