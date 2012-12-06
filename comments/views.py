@@ -7,6 +7,7 @@ from django.contrib.comments.models import Comment
 from django.contrib.comments.views import comments as contrib_comments
 from django.contrib.comments.views.utils import next_redirect, confirmation_view
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.mail import send_mail
 from django.db import models
 from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect
@@ -118,10 +119,47 @@ def custom_comment_post(request, next=None, using=None):
     
     return response
 
+
+## Comment subscription
+
+
+def comment_sub_create(request, next='/'):
+    if request.method == 'POST':
+        form = SubscriberForm(request.POST)
+        if form.is_valid():
+            subscription = form.save(commit=False)
+            subscription.manager_key = subscription.generate_key()
+            subscription.save()
+
+            if subscription.content_type.name == "post":
+                p = Post.objects.get(id=subscription.object_pk)
+                title = p.title
+                object_url = p.get_url()
+                author = p.author.user.username
+                author_email = p.author.user.email
+                author_url = p.author.url
+            else:
+                raise Exception("Unknown subscription content type {0}".format(subscription.content_type.name))
+            
+            subject = _("Confirmation subscription")
+            plaintext = get_template('email_confim_sub.txt')
+            message_context = Context({'title':title,
+                                   'object_url':object_url,
+                                   'unsubscribe_url':subscription.get_unsubscribe_url(),
+                                   'author':author,
+                                   'author_url':author_url})
+            text_content = plaintext.render(message_context)
+
+            send_mail(subject, text_content, author_email, [subscription.email])
+
+            return HttpResponseRedirect(next)
+    
+    return  HttpResponseRedirect(next)
+
 def comment_sub_manage(request, object_id):
     """Manage the comment subscription to an object
 
-    Provide way to change email or unsubscribe"""
+    Provide small summary and unsubscribe link"""
     subscription = get_object_or_404(Subscription, manager_key=object_id)
     return render(request, "subscription_manage.html", {'sub': subscriber})
 
@@ -130,10 +168,3 @@ def comment_sub_remove(request, object_id):
     subscription = get_object_or_404(Subscription, manager_key=object_id)
     subscription.delete()
     return render(request, "subscription_remove.html", {})
-
-def comment_sub_update(request, object_id):
-    """Update the comment subscription to an object
-
-    TODO"""
-    subscription = get_object_or_404(Subscription, manager_key=object_id)
-    return render(request, "subscription_update.html", {})

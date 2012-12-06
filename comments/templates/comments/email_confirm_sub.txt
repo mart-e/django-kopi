@@ -1,0 +1,17 @@
+{% load i18n %}
+
+{% block trans %}
+Hello,
+
+You recieve this email to confirm the subscription to the comments of
+
+{{ title }}
+{{ object_url }}
+
+If you have not subscribed to the comments of this website of you do not want to recieves update anymore, you can unsubscribe at any time at the following url :
+
+{{ unsubscribe_url }}
+
+~{{ author }}
+{{ author_url }}
+{% endblock %}

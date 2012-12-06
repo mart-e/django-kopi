@@ -111,15 +111,15 @@ class Subscription(models.Model):
     
     def generate_key(self):
         import string, random
-        key_lenght = getattr(settings,'COMMENT_SUBSCRIPTION_KEY_LENGTH', 20)
-        key = ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_lenght))
+        key_length = getattr(settings,'COMMENT_SUBSCRIPTION_KEY_LENGTH', 20)
+        key = ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_length))
         subscriptions = Subscription.objects.filter( manager_key=key )
         cpt = 0
         while len(subscriptions) > 0 and cpt < 100:
             # Try until find a unique key
-            # statistically impossible but I don't want an infinite loop
-            # so no more than 100 loop
-            key = ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_lenght))
+            # statistically impossible with a big key size
+            # but I don't want an infinite loop so no more than 100 try
+            key = ''.join(random.choice(string.digits+string.ascii_letters) for i in range(key_length))
             subscriptions = Subscription.objects.filter( manager_key=key )
             cpt += 1
             
@@ -132,3 +132,6 @@ class Subscription(models.Model):
         if not self.manager_key:
             self.manager_key = self.generate_key()
         super(Subscription, self).save(force_insert, force_update)
+
+    def get_unsubscribe_url(self):
+        return reverse('comment-sub-remove',args=[self.manager_key])

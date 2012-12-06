@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.comments.models import Comment
 from django.contrib.comments.forms import CommentForm
 from django.utils.translation import ugettext_lazy as _
-from comments.models import KopiComment
+from comments.models import KopiComment, Subscription
 
 class KopiCommentForm(CommentForm):
     #identifier    = forms.CharField(label=_("Identifier"), max_length=50, required=True)
@@ -50,3 +50,10 @@ class KopiCommentForm(CommentForm):
         return url.split('/')[2][:20]
 
                 
+class SubscriptionForm(forms.ModelForm):
+
+    class Meta:
+        model = Subscription
+        exclude = ('manager_key',)
+
+    

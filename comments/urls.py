@@ -24,9 +24,5 @@ urlpatterns = patterns('comments.views',
     	view='comment_sub_remove',
     	name='comment-sub-remove'),    
 
-    url(r'^subscribe/(?P<object_id>[-\w]+)/update/$',
-    	view='comment_sub_update',
-    	name='comment-sub-update'),    
-
     url( r'^', include( 'django.contrib.comments.urls' ) ),
 )
