@@ -92,3 +92,9 @@ a:hover {
     text-decoration: none;
 }
 
+
+ul.errorlist li {
+  list-style:none;
+  font-weight:bold;
+  color:#3B0B0B;
+}
