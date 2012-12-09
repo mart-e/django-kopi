@@ -2,7 +2,7 @@ import datetime
 import time
 
 from django.conf import settings
-from django.contrib.comments.forms import CommentForm
+#from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
 from django.contrib.comments.views import comments as contrib_comments
 from django.contrib.comments.views.utils import next_redirect, confirmation_view
@@ -11,14 +11,16 @@ from django.core.mail import send_mail
 from django.db import models
 from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect
-from django.template import RequestContext
 from django.shortcuts import get_object_or_404
+from django.template import Context, RequestContext
+from django.template.loader import get_template
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
 from django.utils.timezone import utc
 from django.utils.translation import ugettext_lazy as _
 
-from comments.models import KopiComment
+from blog.models import Post, Page
+from comments.models import KopiComment, Subscription
 from comments.forms import KopiCommentForm
 from tools.shortcuts import render, redirect
 from httpbl.views import HttpBLMiddleware
@@ -53,7 +55,8 @@ def comment_edit(request, object_id, template_name='comments/edit.html'):
             comment.save()
             return redirect(request, comment.content_object)
         else:
-            print(form.errors)
+            pass
+            #print(form.errors)
 
     else:
         comment_dic = model_to_dict(comment)
@@ -96,7 +99,6 @@ def comment_error(request, error_message=_('You can not change this comment.'),
 
 # owerwrite the post_comment form to redirect to NEXTURL#cID and spam checking
 def custom_comment_post(request, next=None, using=None):
-
     # Check if IP not blacklisted
     httpbl = HttpBLMiddleware()
     response = httpbl.process_request(request)
@@ -108,13 +110,16 @@ def custom_comment_post(request, next=None, using=None):
     response = contrib_comments.post_comment(request, next, using)
 
     if type(response) == HttpResponseRedirect:
-        redirect_path, comment_id  = response.get('Location').split( '?c=' )
+        redirect_path, comment_id = response.get('Location').split('?c=')
         # check if the comment was saved
         comment = KopiComment.objects.get( id=comment_id )
         if comment:
             # set the session id to the current one to allow edit
             comment.session_id = request.session.session_key
             comment.save()
+
+            if 'subscribe' in request.POST:
+                comment_subscribe(comment)
             return HttpResponseRedirect( comment.get_absolute_url("#c%(id)s") )
     
     return response
@@ -122,8 +127,48 @@ def custom_comment_post(request, next=None, using=None):
 
 ## Comment subscription
 
+def comment_subscribe(comment):
+    subscription = Subscription()
+    subscription.content_type = comment.content_type
+    subscription.object_pk = comment.object_pk
+    subscription.email = comment.email
+    subscription.manager_key = subscription.generate_key()
+    subscription.save()
 
-def comment_sub_create(request, next='/'):
+    if subscription.content_type.name == "post":
+        p = Post.objects.get(id=subscription.object_pk)
+    elif subscription.content_type.name == "page":
+        p = Page.objects.get(id=subscription.object_pk)
+    else:
+        raise Exception("Unknown subscription content type {0}".format(subscription.content_type.name))
+    
+    title = p.title
+    object_url = p.get_absolute_url()
+    author = p.author.user.username
+    author_email = p.author.user.email
+    author_url = p.author.url
+            
+    subject = _("Confirmation subscription")
+    plaintext = get_template('mail/mail_confirm_sub.txt')
+    message_context = Context({'title':title,
+                               'object_url':object_url,
+                               'unsubscribe_url':subscription.get_unsubscribe_url(),
+                               'author':author,
+                               'author_url':author_url})
+    text_content = plaintext.render(message_context)
+
+    print({'title':title,
+           'object_url':object_url,
+           'unsubscribe_url':subscription.get_unsubscribe_url(),
+           'author':author,
+           'author_url':author_url})
+
+    try:
+        send_mail(subject, text_content, author_email, [subscription.email])
+    except Exception as e:
+        print("Error while sending mail", e)
+
+def comment_sub_post(request, next='/'):
     if request.method == 'POST':
         form = SubscriberForm(request.POST)
         if form.is_valid():

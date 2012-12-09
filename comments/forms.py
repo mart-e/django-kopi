@@ -9,6 +9,7 @@ class KopiCommentForm(CommentForm):
     # overwrite for required=False
     name          = forms.CharField(label=_("Name"), max_length=50, required=False)
     email         = forms.EmailField(label=_("Email address"), required=False)
+    subscribe     = forms.BooleanField(label=_("Subscribe to comments"), required=False)
 
     class Meta:
         model = KopiComment
@@ -31,9 +32,14 @@ class KopiCommentForm(CommentForm):
         name = self.cleaned_data.get('name') 
         email = self.cleaned_data.get('email')
         url = self.cleaned_data.get('url')
-        # if not name and not email and not url:
-        #     self._errors
-        #     raise forms.ValidationError(_("Please fill at least of of the name, email or url fields"))
+        subscribe = self.cleaned_data.get('subscribe')
+        
+        if not name and not email and not url:
+            raise forms.ValidationError(_("Please fill at least one of the name, email or url fields"))
+        
+        if subscribe and not email:
+            raise forms.ValidationError(_("Please specify an email if you want to subscribe to comments"))
+
         return self.cleaned_data
     
     def computeIdentifier(self, name=None, email=None, url=None):
