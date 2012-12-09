@@ -107,7 +107,7 @@ class Subscription(models.Model):
             related_name="content_type_set_for_%(class)s")
     object_pk      = models.TextField(_('object ID'))
     email          = models.EmailField(_("subscriber's email address"), blank=True)
-    manager_key    = models.TextField(_('Identifier for managing the user'))
+    manager_key    = models.TextField(_('Unique key to manage the subscription'))
 
     
     def generate_key(self):

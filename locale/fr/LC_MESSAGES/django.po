@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-23 18:20+0100\n"
+"POT-Creation-Date: 2012-12-09 16:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,67 +30,67 @@ msgstr "auteur"
 msgid "authors"
 msgstr "auteurs"
 
-#: blog/models.py:14 blog/models.py:70
+#: blog/models.py:17 blog/models.py:74
 msgid "Draft"
 msgstr "Brouillon"
 
-#: blog/models.py:15 blog/models.py:71
+#: blog/models.py:18 blog/models.py:75
 msgid "Public"
 msgstr "Publique"
 
-#: blog/models.py:17 blog/models.py:73
+#: blog/models.py:20 blog/models.py:77
 msgid "title"
 msgstr "titre"
 
-#: blog/models.py:18 blog/models.py:74
+#: blog/models.py:21 blog/models.py:78
 msgid "slug"
 msgstr ""
 
-#: blog/models.py:20 blog/models.py:76
+#: blog/models.py:23 blog/models.py:80
 msgid "body"
 msgstr "corps"
 
-#: blog/models.py:22
+#: blog/models.py:25
 msgid "tease"
 msgstr "en bref"
 
-#: blog/models.py:22
+#: blog/models.py:25
 msgid "Concise text suggested. Does not appear in RSS feed."
 msgstr "Texte conscit suggéré. N'apparait pas dans le flux RSS"
 
-#: blog/models.py:24 blog/models.py:78
+#: blog/models.py:27 blog/models.py:82
 msgid "status"
 msgstr "status"
 
-#: blog/models.py:25 blog/models.py:79
+#: blog/models.py:28 blog/models.py:83
 msgid "allow comments"
 msgstr "autoriser les commentaires"
 
-#: blog/models.py:26
+#: blog/models.py:29
 msgid "publish"
 msgstr "publier"
 
-#: blog/models.py:27
+#: blog/models.py:30
 msgid "created"
 msgstr "créé"
 
-#: blog/models.py:28
+#: blog/models.py:31
 msgid "modified"
 msgstr "modifié"
 
-#: blog/models.py:32
+#: blog/models.py:35
 msgid "post"
 msgstr "article"
 
-#: blog/models.py:33
+#: blog/models.py:36
 msgid "posts"
 msgstr "articles"
 
-#: blog/models.py:83
+#: blog/models.py:87
 msgid "page"
 msgstr "page"
 
-#: blog/models.py:84
+#: blog/models.py:88
 msgid "pages"
 msgstr "pages"
 
@@ -182,21 +182,56 @@ msgstr "Nom"
 msgid "Email address"
 msgstr "Adresse email"
 
-#: comments/models.py:23
-msgid "is content commented owner"
-msgstr ""
+#: comments/forms.py:12
+#, fuzzy
+msgid "Subscribe to comments"
+msgstr "Prévisualiser votre commentaire"
 
-#: comments/views.py:36 comments/views.py:80
+#: comments/forms.py:38
+#, fuzzy
+msgid "Please fill at least one of the name, email or url fields"
+msgstr "Remplissez au moins un des trois premiers champs (nom, email ou url)"
+
+#: comments/forms.py:41
+msgid "Please specify an email if you want to subscribe to comments"
+msgstr "Indiquez une adresse email pour vous abonner aux commentaires"
+
+#: comments/models.py:25
+msgid "is content commented owner"
+msgstr "est le propriétaire du contenu publié"
+
+#: comments/models.py:106
+msgid "content type"
+msgstr "type de contenu"
+
+#: comments/models.py:108
+msgid "object ID"
+msgstr "ID de l'objet"
+
+#: comments/models.py:109
+#, fuzzy
+msgid "subscriber's email address"
+msgstr "Adresse email"
+
+#: comments/models.py:110
+msgid "Unique key to manage the subscription"
+msgstr "Clef unique pour gérer l'abonnement"
+
+#: comments/views.py:39 comments/views.py:84
 msgid "Too old comment"
 msgstr "Commentaire trop vieux"
 
-#: comments/views.py:39 comments/views.py:83
+#: comments/views.py:42 comments/views.py:87
 msgid "You are not the author of the comment or your session has expired"
 msgstr "Vous n'etes pas l'auteur du commentaire ou votre session a expirée"
 
-#: comments/views.py:91
+#: comments/views.py:95
 msgid "You can not change this comment."
 msgstr "Vous ne pouvez pas changer ce commentaire"
+
+#: comments/views.py:151 comments/views.py:189
+msgid "Confirmation subscription"
+msgstr "Confirmation de l'abonnement"
 
 #: comments/templates/comments/approve.html:7
 #: comments/templates/comments/approve.html:11
@@ -245,49 +280,57 @@ msgstr "Merci pour la suppression"
 msgid "Edit comment"
 msgstr "Modifier le commentaire"
 
-#: comments/templates/comments/edit.html:38
-#: comments/templates/comments/form.html:27
-#: comments/templates/comments/preview.html:51
+#: comments/templates/comments/edit.html:24
+#: comments/templates/comments/form.html:12
+#: comments/templates/comments/preview.html:27
+msgid "Please correct the error below"
+msgid_plural "Please correct the errors below"
+msgstr[0] "Merci de corriger l'erreur ci-dessous"
+msgstr[1] "Merci de corriger les erreurs ci-dessous"
+
+#: comments/templates/comments/edit.html:43
+#: comments/templates/comments/form.html:29
+#: comments/templates/comments/preview.html:52
 msgid "Help ?"
 msgstr "Aide ?"
 
-#: comments/templates/comments/edit.html:41
-#: comments/templates/comments/form.html:30
-#: comments/templates/comments/preview.html:54
+#: comments/templates/comments/edit.html:46
+#: comments/templates/comments/form.html:32
+#: comments/templates/comments/preview.html:55
 msgid "Fill at least one of the three first fields (name, email or url)"
 msgstr "Remplissez au moins un des trois premiers champs (nom, email ou url)"
 
-#: comments/templates/comments/edit.html:42
-#: comments/templates/comments/form.html:31
-#: comments/templates/comments/preview.html:55
+#: comments/templates/comments/edit.html:47
+#: comments/templates/comments/form.html:33
+#: comments/templates/comments/preview.html:56
 msgid "Some elements of the Markdown syntax are supported :"
 msgstr "Plusieurs éléments de la syntaxe Markdown sont supportés"
 
-#: comments/templates/comments/edit.html:43
-#: comments/templates/comments/form.html:32
-#: comments/templates/comments/preview.html:56
+#: comments/templates/comments/edit.html:48
+#: comments/templates/comments/form.html:34
+#: comments/templates/comments/preview.html:57
 msgid "__bold__ **bold**"
 msgstr "__gras__ **gras**"
 
-#: comments/templates/comments/edit.html:44
-#: comments/templates/comments/form.html:33
-#: comments/templates/comments/preview.html:57
+#: comments/templates/comments/edit.html:49
+#: comments/templates/comments/form.html:35
+#: comments/templates/comments/preview.html:58
 msgid "_italic_ *italic*"
 msgstr "_italic_ *italic*"
 
-#: comments/templates/comments/edit.html:45
-#: comments/templates/comments/form.html:34
-#: comments/templates/comments/preview.html:58
+#: comments/templates/comments/edit.html:50
+#: comments/templates/comments/form.html:36
+#: comments/templates/comments/preview.html:59
 msgid "(link)[http://url]"
 msgstr "(lien)[http://url]"
 
-#: comments/templates/comments/edit.html:46
-#: comments/templates/comments/form.html:35
-#: comments/templates/comments/preview.html:59
+#: comments/templates/comments/edit.html:51
+#: comments/templates/comments/form.html:37
+#: comments/templates/comments/preview.html:60
 msgid "HTML code is <strong>not</strong> allowed"
 msgstr "Le code HTML n'est <strong>pas</strong> autorisé"
 
-#: comments/templates/comments/edit.html:50
+#: comments/templates/comments/edit.html:55
 msgid "Save"
 msgstr "Sauver"
 
@@ -305,15 +348,15 @@ msgstr "Signaler"
 msgid "Thanks for flagging"
 msgstr "Merci pour votre signalement"
 
-#: comments/templates/comments/form.html:39
-#: comments/templates/comments/preview.html:63
+#: comments/templates/comments/form.html:41
+#: comments/templates/comments/preview.html:64
 msgid "Post"
 msgstr "Article"
 
-#: comments/templates/comments/form.html:40
-#: comments/templates/comments/preview.html:64
+#: comments/templates/comments/form.html:42
+#: comments/templates/comments/preview.html:65
 msgid "Preview"
-msgstr "Apperçu"
+msgstr "Aperçu"
 
 #: comments/templates/comments/list.html:20
 msgid "Avatar of comment"
@@ -337,17 +380,11 @@ msgstr "Merci pour votre commentaire"
 msgid "Preview your comment"
 msgstr "Prévisualiser votre commentaire"
 
-#: comments/templates/comments/preview.html:27
-msgid "Please correct the error below"
-msgid_plural "Please correct the errors below"
-msgstr[0] "Merci de corriger l'erreur ci-dessous"
-msgstr[1] "Merci de corriger les erreurs ci-dessous"
-
-#: comments/templates/comments/preview.html:31
+#: comments/templates/comments/preview.html:32
 msgid "Post your comment"
 msgstr "Envoyer votre commentaire"
 
-#: comments/templates/comments/preview.html:32
+#: comments/templates/comments/preview.html:33
 msgid "or make changes"
 msgstr "ou faites des changements"
 
@@ -373,8 +410,10 @@ msgstr "Liens"
 
 #: themes/default/templates/default.html:25
 msgid "Unless explicit mention, the content of this blog is released under a"
-msgstr ""
-"Sauf si mentionné explicitement, le contenu de ce blog est publié sous une"
+msgstr "Sauf si mentionné explicitement, le contenu de ce blog est publié sous une"
+
+#~ msgid "Identifier for managing the user"
+#~ msgstr "Identifiant pour gérer l'utilisateur"
 
 #~ msgid "Archives"
 #~ msgstr "Archives"
