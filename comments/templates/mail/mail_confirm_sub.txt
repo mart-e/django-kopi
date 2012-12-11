@@ -1,7 +1,4 @@
-{% load i18n %}
-
-{% block trans %}
-Hello,
+{% load i18n %}{% blocktrans %}Hello,
 
 You recieve this email to confirm the subscription to the comments of
 
@@ -14,4 +11,4 @@ If you have not subscribed to the comments of this website of you do not want to
 
 ~{{ author }}
 {{ author_url }}
-{% endblock %}
+{% endblocktrans %}
