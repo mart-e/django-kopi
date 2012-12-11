@@ -2,7 +2,6 @@ import datetime
 import time
 
 from django.conf import settings
-#from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
 from django.contrib.comments.views import comments as contrib_comments
 from django.contrib.comments.views.utils import next_redirect, confirmation_view
@@ -28,6 +27,8 @@ from httpbl.views import HttpBLMiddleware
 MAX_SUBMIT_DATE = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(
             minutes=getattr(settings, 'COMMENT_ALTERATION_TIME_LIMIT', 15))
 
+SUBSCRIPTION_CONFIRMATION = 1
+NEW_COMMENT_ALERT = 2
 
 def comment_edit(request, object_id, template_name='comments/edit.html'):
     """Edit the comment"""
@@ -117,16 +118,24 @@ def custom_comment_post(request, next=None, using=None):
             # set the session id to the current one to allow edit
             comment.session_id = request.session.session_key
             comment.save()
+           
+            for subscription in Subscription.objects.filter(
+                                  content_type = comment.content_type, 
+                                  object_pk = comment.object_pk):
+                if subscription.email != comment.email:
+                    print("sending email for {}".format(subscription.email))
+                    send_comment_email(subscription, NEW_COMMENT_ALERT, comment)
 
             if 'subscribe' in request.POST:
                 comment_subscribe(comment)
+
             return HttpResponseRedirect( comment.get_absolute_url("#c%(id)s") )
     
     return response
 
 
 ## Comment subscription
-
+    
 def comment_subscribe(comment):
     subscription = Subscription()
     subscription.content_type = comment.content_type
@@ -135,6 +144,10 @@ def comment_subscribe(comment):
     subscription.manager_key = subscription.generate_key()
     subscription.save()
 
+    send_comment_email(subscription, SUBSCRIPTION_CONFIRMATION)
+
+
+def send_comment_email(subscription, email_reason, comment=None):
     if subscription.content_type.name == "post":
         p = Post.objects.get(id=subscription.object_pk)
     elif subscription.content_type.name == "page":
@@ -147,21 +160,32 @@ def comment_subscribe(comment):
     author = p.author.user.username
     author_email = p.author.user.email
     author_url = p.author.url
-            
-    subject = _("Confirmation subscription")
-    plaintext = get_template('mail/mail_confirm_sub.txt')
+
+    if email_reason == SUBSCRIPTION_CONFIRMATION:
+        subject = _("Confirmation subscription")
+        plaintext = get_template('mail/mail_confirm_sub.txt')
+    elif email_reason == NEW_COMMENT_ALERT:
+        subject = _("New comment alert")
+        plaintext = get_template('mail/mail_new_comment_alert.txt')
+    
+    if comment:
+        comment_body = comment.comment_html
+    else:
+        comment_body = ""
+
     message_context = Context({'title':title,
                                'object_url':object_url,
                                'unsubscribe_url':subscription.get_unsubscribe_url(),
                                'author':author,
-                               'author_url':author_url})
+                               'author_url':author_url,
+                               'comment_body':comment_body})
     text_content = plaintext.render(message_context)
 
     print({'title':title,
            'object_url':object_url,
            'unsubscribe_url':subscription.get_unsubscribe_url(),
            'author':author,
-           'author_url':author_url})
+           'dest':subscription.email})
 
     try:
         send_mail(subject, text_content, author_email, [subscription.email])

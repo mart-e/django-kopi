@@ -1,0 +1,16 @@
+{% load i18n %}{% blocktrans %}Hello,
+
+You recieve this email to inform you a new comment has been posted on
+
+{{ title }}
+{{ object_url }}
+
+{{ comment_content }}
+
+If you have not subscribed to the comments of this website of you do not want to recieves update anymore, you can unsubscribe at any time at the following url :
+
+{{ unsubscribe_url }}
+
+~{{ author }}
+{{ author_url }}
+{% endblocktrans %}
