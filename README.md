@@ -16,10 +16,12 @@ python manage.py collectstatic
 
 # Dependencies
 
-python (2.6)
-django (1.4)
-django-grappelli (2.4)
+python (2.6+)
+python-markdown
+django (1.4+)
+django-grappelli (2.4+)
 django-tagging
+(all python package requires a python2 version, eg python2-markdown on archlinux)
 
 # Theme
 
