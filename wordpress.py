@@ -140,7 +140,27 @@ class WordpressParser:
         # still tags to do
         
         post.save()
+
+        self.addComments(item, post)
         return post
+
+    def addComments(self, item, target):
+        """Parse `item` to find comments of `target`"""
+        comments = item.getiterator("{http://wordpress.org/export/1.2/}comment")
+        for comment in comments:
+            comment_type = comment.find("{http://wordpress.org/export/1.2/}comment_type").text
+            if comment_type == "pingback":
+                # don't support pingback, not sure I will
+                pass
+            else:
+                com = KopiComment()
+                com.name = comment.find("{http://wordpress.org/export/1.2/}comment_author").text
+                com.email = comment.find("{http://wordpress.org/export/1.2/}comment_author_email").text
+                com.url = comment.find("{http://wordpress.org/export/1.2/}comment_author_url").text
+                com.comment = comment.find("{http://wordpress.org/export/1.2/}comment_content").text
+                post.comment_html = markdown(parser.inlines(com.comment), output_format="html5")
+                post.publish = datetime.strptime(publish,"%Y-%m-%d %H:%M:%S").replace(tzinfo=utc)
+                com.save()
 
 
 if __name__ == "__main__":
