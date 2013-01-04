@@ -21,7 +21,7 @@ class ListPostView(list.ListView):
     month_format = '%m'
     date_field = 'publish'
     paginate_by = getattr(settings,'BLOG_PAGESIZE', 10)
-
+    
     def get_queryset(self):
         return Post.objects.filter(status=2)
 
