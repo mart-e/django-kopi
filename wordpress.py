@@ -21,11 +21,14 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kopi.settings")
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
 from django.utils.timezone import utc
 
 from author.models import Author
 from blog.models import Post, Page
+from comments.models import KopiComment
 from inlines import parser
 
 class WordpressParser:
@@ -34,6 +37,17 @@ class WordpressParser:
         
         self.tree = ElementTree()
         self.tree.parse(filename)
+
+    def identifySite(self):
+        print("Identifying site")
+        channel = self.tree.find("channel")
+        title = channel.find("title").text
+        url = channel.find("{http://wordpress.org/export/1.2/}base_site_url").text
+        current_site = Site.objects.get_current()
+        current_site.name = title
+        current_site.domain = url[7:] # remove http://
+        current_site.save()
+        self.site = current_site
 
     def identifyAuthor(self):
         print("Creating author")
@@ -99,7 +113,7 @@ class WordpressParser:
         pub_date = item.find("pubDate").text # Fri, 05 Feb 2010 11:14:00 +0000
         author = item.find("{http://purl.org/dc/elements/1.1/}creator").text # mart
         content = item.find("{http://purl.org/rss/1.0/modules/content/}encoded").text # the whole article
-        slug = item.find("{http://wordpress.org/export/1.2/}post_name").text # nouveau-blog
+        slug = item.find("{http://wordpress.org/export/1.2/}post_name").text # nouveau-blog (CAN BE EMPTY)
         allow_comments = item.find("{http://wordpress.org/export/1.2/}comment_status").text # open
         status = item.find("{http://wordpress.org/export/1.2/}status").text # publish
         publish = item.find("{http://wordpress.org/export/1.2/}post_date").text # 2010-01-05 15:09:00
@@ -108,15 +122,19 @@ class WordpressParser:
         # <category domain="post_tag" nicename="privacy"><![CDATA[privacy]]></category>
         # <category domain="post_tag" nicename="truecrypt"><![CDATA[truecrypt]]></category>
         
-        posts = Post.objects.filter(slug=slug)
+        if slug:
+            posts = Post.objects.filter(slug=slug)
+        else:
+            posts = Post.objects.filter(id=int(post_id))
         if len(posts) != 0:
-            print("Skipping {0}".format(slug))
+            print("Skipping {0}".format(posts[0].slug))
             return posts[0]
 
         print("Creating post '"+title+"'")
         #print("Creating post '{0}'".format(title.decode('utf-8')))
         post = Post()
         post.title = title
+        post.id = post_id
         if slug:
             post.slug = slug[:50]
         else:
@@ -154,19 +172,34 @@ class WordpressParser:
                 pass
             else:
                 com = KopiComment()
-                com.name = comment.find("{http://wordpress.org/export/1.2/}comment_author").text
-                com.email = comment.find("{http://wordpress.org/export/1.2/}comment_author_email").text
-                com.url = comment.find("{http://wordpress.org/export/1.2/}comment_author_url").text
+                com.user_name = comment.find("{http://wordpress.org/export/1.2/}comment_author").text
+                if not com.user_name:
+                    com.user_name = ""
+                com.user_email = comment.find("{http://wordpress.org/export/1.2/}comment_author_email").text
+                if not com.user_email:
+                    com.user_email = ""
+                com.user_url = comment.find("{http://wordpress.org/export/1.2/}comment_author_url").text
+                if not com.user_url:
+                    com.user_url = ""
                 com.comment = comment.find("{http://wordpress.org/export/1.2/}comment_content").text
-                post.comment_html = markdown(parser.inlines(com.comment), output_format="html5")
-                post.publish = datetime.strptime(publish,"%Y-%m-%d %H:%M:%S").replace(tzinfo=utc)
-                com.save()
+                com.comment_html = markdown(parser.inlines(com.comment), output_format="html5")
+                comment_date = comment.find("{http://wordpress.org/export/1.2/}comment_date").text
+                com.publish = datetime.strptime(comment_date,"%Y-%m-%d %H:%M:%S").replace(tzinfo=utc)
+
+                com.content_type = ContentType.objects.get_for_model(target)
+                com.object_pk = target.id
+                com.site = self.site
+                try:
+                    com.save()
+                except:
+                    print("Error", com, com.user_url)
 
 
 if __name__ == "__main__":
     #execute_from_command_line("syncdb")
     
     wp = WordpressParser("wordpress.xml")
+    wp.identifySite()
     wp.identifyAuthor()
     wp.findTags()
     wp.findItems()
