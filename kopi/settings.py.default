@@ -2,7 +2,8 @@
 
 import os.path
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(os.path.join(os.path.dirname(__file__))))
+SETTINGS_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SETTINGS_DIR)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
