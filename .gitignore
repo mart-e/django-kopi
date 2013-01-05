@@ -1,6 +1,7 @@
 manage.py
 *.py[c]
 *.db
+*.xml
 secret.txt
 settings.py
 uploads/
