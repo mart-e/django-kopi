@@ -67,11 +67,13 @@ section .blog_post h1 {
 /* Render for larger displays */
 @media only screen and (min-width: 768px) {
     section .blog_post {
-        width: 60%;
+        width: 75%;
+        padding-right:3%;
     }
 
     section aside {
-        width: 30%;
+        width: 18%;
+        padding: 3% 0% 3% 3%;
     }
 }
 
