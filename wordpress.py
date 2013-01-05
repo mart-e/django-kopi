@@ -130,7 +130,10 @@ class WordpressParser:
             print("Skipping {0}".format(posts[0].slug))
             return posts[0]
 
-        print("Creating post '"+title+"'")
+        try:
+            print("Creating post '"+title+"'")
+        except:
+            print("Creating post #"+post_id)
         #print("Creating post '{0}'".format(title.decode('utf-8')))
         post = Post()
         post.title = title
