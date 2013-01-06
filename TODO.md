@@ -6,11 +6,11 @@
 	* RSS -> ok
 * Commentaires
 	* Redirection -> ok
-	* Markdown -> partiel
+	* Markdown -> ok
 	* Preview -> moche mais ok
 	* Choix nom/email/url -> ok
 	* OpenID
-	* Spam -> partiel
+	* Spam -> ok
 	* Avatars -> javatar,gravatar (devrait passer en js)
 	* Cookie
 	* Edition -> statique, régler timestamp

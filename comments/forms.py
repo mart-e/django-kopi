@@ -10,6 +10,13 @@ class KopiCommentForm(CommentForm):
     name          = forms.CharField(label=_("Name"), max_length=50, required=False)
     email         = forms.EmailField(label=_("Email address"), required=False)
     subscribe     = forms.BooleanField(label=_("Subscribe to comments"), required=False)
+    
+    # overwrite for initial that will be removed in javascript (antispam.js)
+    honeypot      = forms.CharField(required=False,
+                                    label=_('Antispam check'),
+                                    initial=_('You need to enable javascript'\
+                                                  'to be able to comment on this site.'\
+                                                  'Sorry for the inconvenience.'))
 
     class Meta:
         model = KopiComment

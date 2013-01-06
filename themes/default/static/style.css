@@ -409,6 +409,13 @@ textarea, input {
     font-family: Cantarell , Verdana, "DejaVu Sans", "Bitstream Vera Sans", Geneva, sans-serif;
 }
 
+.warning, .error {
+    font-weight:bold;
+}
+.error {
+    color: darkred;
+}
+
 a {
     color: #000;
     text-decoration: none;
