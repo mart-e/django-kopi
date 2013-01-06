@@ -80,6 +80,9 @@ class KopiComment(Comment):
                 
         super(KopiComment, self).save(force_insert, force_update)
 
+    class Meta:
+        ordering = ['-submit_date',]
+
 
 def getJavatar(url):
     javatar_url = "{0}/avatar.png".format(url)
