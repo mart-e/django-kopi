@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from blog.models import Post, Page
 
 from markdown import markdown
+from tools.markdown_ext import RestrictiveMarkdownExtension
 import hashlib
 import requests
 import datetime
@@ -54,7 +55,8 @@ class KopiComment(Comment):
             
 
     def save(self, force_insert=False, force_update=False):
-        self.comment_html = markdown(self.comment, safe_mode="escape")
+        rext = RestrictiveMarkdownExtension()
+        self.comment_html = markdown(self.comment, [rext], safe_mode="escape")
         
         # check if content owner of the blog post
         if self.user and self.content_type.app_label == "blog" and self.content_type.name == "post":
