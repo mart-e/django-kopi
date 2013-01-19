@@ -30,6 +30,7 @@ from django.utils.timezone import utc
 from author.models import Author
 from blog.models import Post, Page
 from comments.models import KopiComment
+from tagging.models import Tag
 from inlines import parser
 
 class WordpressParser:
@@ -80,12 +81,14 @@ class WordpressParser:
             self.author = authors[0]
 
 
-    def findTags(self):
-        channel = self.tree.find("channel")
-        tags =  channel.getiterator("{http://wordpress.org/export/1.2/}tag")
-        for tag in tags:
-            slug = tag.find("{http://wordpress.org/export/1.2/}tag_slug").text
-            name = tag.find("{http://wordpress.org/export/1.2/}tag_name").text
+    # useless ?
+    #
+    # def findTags(self):
+    #     channel = self.tree.find("channel")
+    #     tags =  channel.getiterator("{http://wordpress.org/export/1.2/}tag")
+    #     for tag in tags:
+    #         slug = tag.find("{http://wordpress.org/export/1.2/}tag_slug").text
+    #         name = tag.find("{http://wordpress.org/export/1.2/}tag_name").text
             
 
     def findItems(self):
@@ -167,6 +170,9 @@ class WordpressParser:
         post.save()
 
         self.addComments(item, post)
+
+        self.addTags(item, post)
+        
         return post
 
     def addComments(self, item, target):
@@ -192,7 +198,7 @@ class WordpressParser:
                 #com.comment_html = markdown(parser.inlines(com.comment), output_format="html5")
                 comment_date = comment.find("{http://wordpress.org/export/1.2/}comment_date").text
                 com.publish = datetime.strptime(comment_date,"%Y-%m-%d %H:%M:%S").replace(tzinfo=utc)
-
+                
                 com.content_type = ContentType.objects.get_for_model(target)
                 com.object_pk = target.id
                 com.site = self.site
@@ -201,6 +207,17 @@ class WordpressParser:
                 except:
                     print("Error", com, com.user_url)
 
+
+    def addTags(self,item,target):
+        """Create the adequate tags
+        
+        TODO associate the tags to the post (one way so far)"""
+        categories = item.getiterator("category")
+        tags = ""
+        for category in categories:
+            if "domain" in category.attrib and category.attrib["domain"] == "post_tag":
+                tags += category.attrib["nicename"] + " "
+        Tag.objects.update_tags(target, tags)
 
 if __name__ == "__main__":
     #execute_from_command_line("syncdb")
@@ -213,5 +230,4 @@ if __name__ == "__main__":
     wp = WordpressParser(xml_file)
     wp.identifySite()
     wp.identifyAuthor()
-    wp.findTags()
     wp.findItems()
