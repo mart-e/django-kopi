@@ -18,6 +18,7 @@ python manage.py collectstatic
 
 python (2.6+)
 python-markdown
+python-requests
 django (1.4+)
 django-grappelli (2.4+)
 django-tagging
