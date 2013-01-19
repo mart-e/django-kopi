@@ -17,6 +17,7 @@ from xml.etree.ElementTree import ElementTree
 from markdown import markdown
 from datetime import datetime
 import os
+import sys
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kopi.settings")
 
@@ -188,7 +189,7 @@ class WordpressParser:
                 if not com.user_url:
                     com.user_url = ""
                 com.comment = comment.find("{http://wordpress.org/export/1.2/}comment_content").text
-                com.comment_html = markdown(parser.inlines(com.comment), output_format="html5")
+                #com.comment_html = markdown(parser.inlines(com.comment), output_format="html5")
                 comment_date = comment.find("{http://wordpress.org/export/1.2/}comment_date").text
                 com.publish = datetime.strptime(comment_date,"%Y-%m-%d %H:%M:%S").replace(tzinfo=utc)
 
@@ -204,7 +205,12 @@ class WordpressParser:
 if __name__ == "__main__":
     #execute_from_command_line("syncdb")
     
-    wp = WordpressParser("wordpress.xml")
+    if len(sys.argv) > 1 and os.path.isfile(sys.argv[1]):
+        xml_file = sys.argv[1]
+    else:
+        xml_file = "wordpress.xml"
+
+    wp = WordpressParser(xml_file)
     wp.identifySite()
     wp.identifyAuthor()
     wp.findTags()
