@@ -146,7 +146,10 @@ class WordpressParser:
             raise Exception("Unknown author {0}".format(author))
         post.author = self.author
         post.body = content
-        post.body_html = markdown(parser.inlines(content), output_format="html5")
+        #post.body_html = markdown(parser.inlines(content), output_format="html5")
+        # in wordpress don't use markdown
+        post.body_html = post.body
+        
         if status == "publish":
             post.status = 2
         else:
