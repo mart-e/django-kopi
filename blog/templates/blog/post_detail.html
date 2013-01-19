@@ -1,6 +1,6 @@
 {% extends "blog/base_blog.html" %}
 
-{% load comments markup humanize i18n inlines_tags %}
+{% load comments markup i18n inlines_tags %}
 
 {% block title %}{{ current_post.title }}{% endblock %}
 {% block body_class %}{{ current_post.super }} post_detail{% endblock %}
@@ -35,7 +35,7 @@
     </div>
     <div class="date">
       <strong>{% trans "Date" %}</strong>
-      <time datetime="{{ current_post.publish|date:"Y-m-j H:i" }}">{{ current_post.publish|naturaltime }}</time>
+      <time datetime="{{ current_post.publish|date:"Y-m-j H:i" }}">{{ current_post.publish }}</time>
     </div>
     <div class="coms">
       <strong>
