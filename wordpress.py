@@ -24,12 +24,14 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kopi.settings")
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
+from django.core.files import File
 from django.template.defaultfilters import slugify
 from django.utils.timezone import utc
 
 from author.models import Author
 from blog.models import Post, Page
 from comments.models import KopiComment
+from media.models import Photo
 from tagging.models import Tag
 from inlines import parser
 
@@ -103,6 +105,7 @@ class WordpressParser:
             item_title = item.find("title").text            
             if item_type == "attachment":
                 cpt_media += 1
+                self.addMedia(item)
             elif item_type == "post":
                 cpt_post += 1
                 self.addPost(item)
@@ -312,10 +315,15 @@ class WordpressParser:
         media.uploaded = publish
         media.modified = publish
 
-        media.photo = models.FileField(upload_to="photos")
-        media.photo.name = 
-
+        # move file
+        # TODO use date from wordpress, not from today
+        path = os.path.join(self.wp_content, attachment_url.split("wp-content/")[1])
+        f = open(path, 'r')
+        media.photo = File(f)
+        #models.FileField(upload_to="photos/{0}/{1}".format(publish.year, publish.month))
+        
         media.save()
+        f.close()
         
         return media
 
