@@ -328,7 +328,7 @@ if __name__ == "__main__":
         xml_file = "wordpress.xml"
 
     if len(sys.argv) > 2 and os.path.isdir(sys.argv[2]):
-        wp_content_dit = sys.argv[2]
+        wp_content_dir = sys.argv[2]
     else:
         wp_content_dir = "wp-content"
         
