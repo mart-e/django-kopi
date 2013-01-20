@@ -30,7 +30,7 @@ class Audio(models.Model):
     """Audio model"""
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    still = models.FileField(upload_to='audio_stills', blank=True, help_text='An image that will be used as a thumbnail.')
+    still = models.FileField(upload_to='audio_stills/%Y/%m', blank=True, help_text='An image that will be used as a thumbnail.')
     audio = models.FilePathField(path=settings.MEDIA_ROOT+'audios/', recursive=True)
     description = models.TextField(blank=True)
     tags = TagField()
@@ -82,7 +82,7 @@ class Photo(models.Model):
     )
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    photo = models.FileField(upload_to="photos")
+    photo = models.FileField(upload_to="photos/%Y/%m")
     taken_by = models.CharField(max_length=100, blank=True)
     license = models.URLField(blank=True, choices=LICENSES)
     description = models.TextField(blank=True)
@@ -141,7 +141,7 @@ class Video(models.Model):
     """Video model"""
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    still = models.FileField(upload_to='video_stills', blank=True, help_text='An image that will be used as a thumbnail.')
+    still = models.FileField(upload_to='video_stills/%Y/%m', blank=True, help_text='An image that will be used as a thumbnail.')
     video = models.FilePathField(path=settings.MEDIA_ROOT+'videos/', recursive=True)
     description = models.TextField(blank=True)
     tags = TagField()
