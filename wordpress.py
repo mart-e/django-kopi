@@ -35,10 +35,11 @@ from inlines import parser
 
 class WordpressParser:
 
-    def __init__(self, filename):
+    def __init__(self, xml_file, wp_content_dir):
         
         self.tree = ElementTree()
-        self.tree.parse(filename)
+        self.tree.parse(xml_file)
+        self.wp_content = wp_content_dir
 
     def identifySite(self):
         print("Identifying site")
@@ -195,7 +196,7 @@ class WordpressParser:
         try:
             print("Creating page '"+title+"'")
         except:
-            print("Creating page #"+post_id)
+            print("Creating page #"+page_id)
             
         page = Page()
         page.title = title
@@ -273,15 +274,65 @@ class WordpressParser:
         target.tags = tags
         target.save()
 
+    def addMedia(self,item):
+        title = item.find("title").text # Ostrich reads newspaper
+        link = item.find("link").text # http://mart-e.be/post/2013/01/18/media-id-la-presse-belge-evolue/3236806056_a0d1236ef3/
+        media_id = item.find("{http://wordpress.org/export/1.2/}post_id").text # 2
+        content = item.find("{http://purl.org/rss/1.0/modules/content/}encoded").text # the whole article
+        slug = item.find("{http://wordpress.org/export/1.2/}post_name").text # nouveau-blog (CAN BE EMPTY)
+        #allow_comments = item.find("{http://wordpress.org/export/1.2/}comment_status").text # open
+        publish = item.find("{http://wordpress.org/export/1.2/}post_date").text # 2010-01-05 15:09:00
+        
+        attachment_url = item.find("{http://wordpress.org/export/1.2/}attachment_url").text
+        if not attachment_url[-4:].lower() in [".jpg",".png",".gif"]:
+            raise Exception("Unknown file format {0}".format(attachment_url[-4:]))
+        # TODO support other types
+        
+        if slug:
+            medias = Photo.objects.filter(slug=slug)
+        else:
+            medias = Page.objects.filter(id=int(media_id))
+        if len(medias) != 0:
+            print("Skipping {0}".format(medias[0].slug))
+            return medias[0]
+
+        try:
+            print("Creating media '"+title+"'")
+        except:
+            print("Creating media #"+media_id)
+            
+        media = Photo()
+        media.title = title
+        media.id = media_id
+        if slug:
+            media.slug = slug[:50]
+        else:
+            media.slug = slugify(title)[:50]
+        
+        media.uploaded = publish
+        media.modified = publish
+
+        media.photo = models.FileField(upload_to="photos")
+        media.photo.name = 
+
+        media.save()
+        
+        return media
+
 if __name__ == "__main__":
     #execute_from_command_line("syncdb")
     
     if len(sys.argv) > 1 and os.path.isfile(sys.argv[1]):
-        xml_file = sys.argv[1]
+        xml_file = sys.argv[1]    
     else:
         xml_file = "wordpress.xml"
 
-    wp = WordpressParser(xml_file)
+    if len(sys.argv) > 2 and os.path.isdir(sys.argv[2]):
+        wp_content_dit = sys.argv[2]
+    else:
+        wp_content_dir = "wp-content"
+        
+    wp = WordpressParser(xml_file, wp_content_dir)
     wp.identifySite()
     wp.identifyAuthor()
     
