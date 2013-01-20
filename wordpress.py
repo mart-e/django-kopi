@@ -124,10 +124,6 @@ class WordpressParser:
         allow_comments = item.find("{http://wordpress.org/export/1.2/}comment_status").text # open
         status = item.find("{http://wordpress.org/export/1.2/}status").text # publish
         publish = item.find("{http://wordpress.org/export/1.2/}post_date").text # 2010-01-05 15:09:00
-        # <category domain="post_tag" nicename="cryptographie"><![CDATA[cryptographie]]></category>
-        # <category domain="category" nicename="gnu-linux"><![CDATA[GNU/Linux]]></category>
-        # <category domain="post_tag" nicename="privacy"><![CDATA[privacy]]></category>
-        # <category domain="post_tag" nicename="truecrypt"><![CDATA[truecrypt]]></category>
         
         if slug:
             posts = Post.objects.filter(slug=slug)
@@ -168,7 +164,6 @@ class WordpressParser:
         post.publish = datetime.strptime(publish,"%Y-%m-%d %H:%M:%S").replace(tzinfo=utc)
         post.created = post.publish # really, who cares about that
         post.modifier = post.publish # still don't care
-        # still tags to do
         
         post.save()
 
@@ -234,4 +229,5 @@ if __name__ == "__main__":
     wp = WordpressParser(xml_file)
     wp.identifySite()
     wp.identifyAuthor()
+    
     wp.findItems()
