@@ -173,6 +173,61 @@ class WordpressParser:
         
         return post
 
+    def addPage(self, item):
+        title = item.find("title").text # About
+        link = item.find("link").text # http://mart-e.be/?p=2 ou http://mart-e.be/about
+        page_id = item.find("{http://wordpress.org/export/1.2/}post_id").text # 2
+        author = item.find("{http://purl.org/dc/elements/1.1/}creator").text # mart
+        content = item.find("{http://purl.org/rss/1.0/modules/content/}encoded").text # the whole article
+        slug = item.find("{http://wordpress.org/export/1.2/}post_name").text # nouveau-blog (CAN BE EMPTY)
+        allow_comments = item.find("{http://wordpress.org/export/1.2/}comment_status").text # open
+        status = item.find("{http://wordpress.org/export/1.2/}status").text # publish
+        publish = item.find("{http://wordpress.org/export/1.2/}post_date").text # 2010-01-05 15:09:00
+        
+        if slug:
+            pages = Page.objects.filter(slug=slug)
+        else:
+            pages = Page.objects.filter(id=int(page_id))
+        if len(pages) != 0:
+            print("Skipping {0}".format(pages[0].slug))
+            return pages[0]
+
+        try:
+            print("Creating page '"+title+"'")
+        except:
+            print("Creating page #"+post_id)
+            
+        page = Page()
+        page.title = title
+        page.id = page_id
+        if slug:
+            page.slug = slug[:50]
+        else:
+            page.slug = slugify(title)[:50]
+        if author != self.author_name:
+            raise Exception("Unknown author {0}".format(author))
+        page.author = self.author
+        page.body = content
+        
+        # in wordpress don't use markdown
+        page.body_html = page.body
+        
+        if status == "publish":
+            page.status = 2
+        else:
+            page.status = 1
+        if allow_comments == "open":
+            page.allow_comments = True
+        else:
+            page.allow_comments = False
+                
+        page.save()
+
+        self.addComments(item, page)
+        
+        return page
+
+
     def addComments(self, item, target):
         """Parse `item` to find comments of `target`"""
         comments = item.getiterator("{http://wordpress.org/export/1.2/}comment")
