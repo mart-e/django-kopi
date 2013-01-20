@@ -217,7 +217,8 @@ class WordpressParser:
         for category in categories:
             if "domain" in category.attrib and category.attrib["domain"] == "post_tag":
                 tags += category.attrib["nicename"] + " "
-        Tag.objects.update_tags(target, tags)
+        target.tags = tags
+        target.save()
 
 if __name__ == "__main__":
     #execute_from_command_line("syncdb")
