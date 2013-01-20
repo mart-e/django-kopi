@@ -94,19 +94,22 @@ class WordpressParser:
     def findItems(self):
         items = self.tree.getiterator("item")
         cpt_post = 0
+        cpt_page = 0
+        cpt_media = 0
 
         for item in items:
             item_type = item.find("{http://wordpress.org/export/1.2/}post_type").text
             item_title = item.find("title").text            
             if item_type == "attachment":
-                pass
+                cpt_media += 1
             elif item_type == "post":
                 cpt_post += 1
                 self.addPost(item)
             elif item_type == "page":
-                pass
+                cpt_page += 1
+                self.addPage(item)
 
-        print("Found {0} posts".format(cpt_post))
+        print("Found {0} posts, {1} pages and {2} medias".format(cpt_post, cpt_page, cpt_media))
 
 
     def addPost(self, item):
