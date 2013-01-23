@@ -175,6 +175,7 @@ INSTALLED_APPS = (
     'httpbl',
     'media',
     'inlines',
+    'wordpress',
     
     'tagging',
    # 'south',
