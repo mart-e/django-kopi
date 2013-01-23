@@ -4,6 +4,23 @@ from django.conf import settings
 from tagging.fields import TagField
 
 import tagging
+import os
+
+def get_directory_path(instance, filename):
+    """Compute the filename for the different uploaded files
+
+    TODO handle other types than photo"""
+    filename = os.path.basename(filename)
+    if type(instance) == Photo:
+        upload_type = "photos"
+    else:
+        upload_type = "files"
+    path = os.path.join(upload_type, "%Y/%m", filename)
+
+    if instance.uploaded:
+        return os.path.normpath(instance.uploaded.strftime(path))
+    else:
+        return os.path.normpath(datetime.datetime.now().strftime(path))
 
 
 class AudioSet(models.Model):
@@ -82,7 +99,7 @@ class Photo(models.Model):
     )
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    photo = models.FileField(upload_to="photos/%Y/%m")
+    photo = models.FileField(upload_to = get_directory_path)
     taken_by = models.CharField(max_length=100, blank=True)
     license = models.URLField(blank=True, choices=LICENSES)
     description = models.TextField(blank=True)
@@ -115,7 +132,7 @@ class Photo(models.Model):
     @permalink
     def get_absolute_url(self):
         return ('photo_detail', None, { 'slug': self.slug })
-
+        
 
 class VideoSet(models.Model):
     """VideoSet model"""
