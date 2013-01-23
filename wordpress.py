@@ -104,8 +104,8 @@ class WordpressParser:
             item_type = item.find("{http://wordpress.org/export/1.2/}post_type").text
             item_title = item.find("title").text            
             if item_type == "attachment":
-                cpt_media += 1
-                self.addMedia(item)
+                if self.addMedia(item):
+                    cpt_media += 1
             elif item_type == "post":
                 cpt_post += 1
                 self.addPost(item)
