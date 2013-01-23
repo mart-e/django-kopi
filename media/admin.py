@@ -18,6 +18,7 @@ admin.site.register(PhotoSet, PhotoSetAdmin)
 
 
 class PhotoAdmin(admin.ModelAdmin):
+    list_display  = ('title', 'uploaded', 'description')
     prepopulated_fields = {'slug': ('title',)}
 admin.site.register(Photo, PhotoAdmin)
 
