@@ -302,19 +302,20 @@ class WordpressParser:
         else:
             media.slug = slugify(title)[:50]
         
-        media.uploaded = publish
-        media.modified = publish
-
         # move file
         # TODO use date from wordpress, not from today
         path = os.path.join(self.wp_content, attachment_url.split("wp-content/")[1])
         f = open(path, 'r')
         media.photo = File(f)
-        #models.FileField(upload_to="photos/{0}/{1}".format(publish.year, publish.month))
-        
-        media.save()
+
+        publish = publish = datetime.strptime(publish,"%Y-%m-%d %H:%M:%S").replace(tzinfo=utc)
+        media.uploaded = publish
+        media.modified = publish
+        media.save()        
+        #media.save()
         f.close()
-        
+
+
         return media
 
 if __name__ == "__main__":
