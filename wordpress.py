@@ -82,16 +82,6 @@ class WordpressParser:
         else:
             print("Author {0} present, skipping".format(authors[0].user.username))
             self.author = authors[0]
-
-
-    # useless ?
-    #
-    # def findTags(self):
-    #     channel = self.tree.find("channel")
-    #     tags =  channel.getiterator("{http://wordpress.org/export/1.2/}tag")
-    #     for tag in tags:
-    #         slug = tag.find("{http://wordpress.org/export/1.2/}tag_slug").text
-    #         name = tag.find("{http://wordpress.org/export/1.2/}tag_name").text
             
 
     def findItems(self):
@@ -186,7 +176,6 @@ class WordpressParser:
         slug = item.find("{http://wordpress.org/export/1.2/}post_name").text # nouveau-blog (CAN BE EMPTY)
         allow_comments = item.find("{http://wordpress.org/export/1.2/}comment_status").text # open
         status = item.find("{http://wordpress.org/export/1.2/}status").text # publish
-        publish = item.find("{http://wordpress.org/export/1.2/}post_date").text # 2010-01-05 15:09:00
         
         if slug:
             pages = Page.objects.filter(slug=slug)
@@ -288,8 +277,9 @@ class WordpressParser:
         
         attachment_url = item.find("{http://wordpress.org/export/1.2/}attachment_url").text
         if not attachment_url[-4:].lower() in [".jpg",".png",".gif"]:
-            raise Exception("Unknown file format {0}".format(attachment_url[-4:]))
-        # TODO support other types
+            # TODO support other types            
+            # raise Exception("Unknown file format {0}".format(attachment_url[-4:]))
+            return False
         
         if slug:
             medias = Photo.objects.filter(slug=slug)
