@@ -2,7 +2,7 @@ Kopi is a blog application using Django. This is still a work in progress.
 
 # Installation
 
-cp kopi/settings.py.default kopi/settings.py
+`cp kopi/settings.py.default kopi/settings.py`
 
 Modify the following variables to match your config
   
@@ -14,7 +14,7 @@ Modify the following variables to match your config
   * USER_THEME if you created your own theme
   * STATIC_ROOT where will be stored your static files
 
-python manage.py collectstatic
+`python manage.py collectstatic`
 
 # Dependencies
 
@@ -32,11 +32,13 @@ By default, the theme used is name "default" and defined in `theme/default/` fol
 Don't modify the content of this folder, create a new theme instead.
 To create a new theme, create the following hiearchy folder
 
+```
 theme/
     default/ # do not change this
     mytheme/
         static/
         templates/
+```
 
 You can copy the files contained in the default/ folder if needed.
 The file in your theme folder will overwrite the one in the default theme if present, otherwise it will use the default files.
