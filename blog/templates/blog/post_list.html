@@ -1,6 +1,6 @@
 {% extends "blog/base_blog.html" %}
 
-{% load markup humanize i18n inlines_tags %}
+{% load markup i18n inlines_tags %}
 
 {% block title %}Archive des articles{% endblock %}
 {% block body_class %}{{ block.super }} post_list{% endblock %}
@@ -37,7 +37,7 @@
           </div>
           <div class="date">
             <strong>{% trans "Date" %}</strong>
-            <time datetime="{{ post.publish|date:"Y-m-j H:i" }}">{{ post.publish|naturaltime }}</time>
+            <time datetime="{{ post.publish|date:"Y-m-j H:i" }}">{{ post.publish }}</time>
           </div>
           <div class="coms">
             <strong>

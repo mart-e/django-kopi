@@ -17,7 +17,8 @@ if settings.DEBUG:
     urlpatterns += patterns('',
         url(r'^uploads/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
-        }),
+        },
+),
    )
 
 urlpatterns += patterns('',
@@ -28,4 +29,5 @@ urlpatterns += patterns('',
                         url(r'^comments/', include('comments.urls')),
                         url(r'^photos/', include('media.urls.photos')),
                         url(r'^videos/', include('media.urls.videos')),
+                        url(r'',include('wordpress.urls')),
                         )
