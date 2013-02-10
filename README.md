@@ -1,3 +1,5 @@
+Kopi is a blog application using Django. This is still a work in progress.
+
 # Installation
 
 cp kopi/settings.py.default kopi/settings.py
